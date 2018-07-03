@@ -1,0 +1,78 @@
+- if @version.persisted?
+  - url = song_version_path(@version.song, @version)
+- elsif @version.song&.persisted?
+  - url = song_versions_path(@version.song)
+- else
+  - url = songs_path
+
+= form_for @version, url: url do |f|
+  .row
+    .col-xl-6
+      .form-group
+        = f.label :title, autofocus: @version.new_record?
+        = f.text_field :title, class: 'form-control'
+
+    .col-xl-6
+      .form-group
+        = f.label :author_name
+        = f.text_field :author_name, class: 'form-control'
+
+  .row
+    .col-md-6
+      .form-group
+        = f.label :key
+        = f.text_field :key, class: 'form-control', maxlength: 3, pattern: "[A|B|C|D|E|F|G](b|#)?m?", title: 'G, Bb, Em, etc..'
+
+    .col-md-6
+      .form-group
+        = f.label :year
+        = f.number_field :year, class: 'form-control', maxlength: 4, min: 1000, max: Date.current.year
+
+  .row
+
+    .col-md-6
+      .form-group
+        = f.label :lang
+        = f.select :lang,
+                   [['English', 'en'],
+                    ['Portuguese', 'pt'],
+                    ['Portuguese (Brazil)', 'pt-br'],
+                    ['Spanish', 'es']],
+                   {},
+                   class: 'custom-select',
+                   data: { icon: 'flag' }
+    .col-md-6
+      .form-group
+        = f.label :version_type
+        = f.select :version_type,
+                   options_for_select([['Original', :original],
+                    ['Translation', :translation],
+                    ['Interpretation', :interpretation],
+                    ['Alternative', :alternative]]),
+                   {},
+                   class: 'custom-select',
+                   data: { description_original: 'The original version of this song',
+                           description_translation: 'A direct translation from the original language',
+                           description_interpretation: 'A translation with new lyrics to fit the new language',
+                           description_alternative: 'Alternative chords or lyrics to the original song' }
+
+  .form-group
+    = f.label :content
+    = f.text_area :content, class: 'form-control', rows: 10
+
+  - if @version.errors.present?
+    .form-group
+      .alert.alert-danger
+        %ul.mb-0.pl-3
+          - @version.errors.full_messages.each do |msg|
+            %li= msg
+
+  .form-actions
+    - if @version.persisted?
+      = link_to 'Cancel', song_version_path(@version.song, @version), class: 'btn btn-secondary'
+    - elsif @version.song&.persisted?
+      = link_to 'Cancel', song_path(@version.song), class: 'btn btn-secondary'
+    - else
+      = link_to 'Cancel', url, class: 'btn btn-secondary'
+
+    = f.submit 'Save changes', class: 'btn btn-primary'

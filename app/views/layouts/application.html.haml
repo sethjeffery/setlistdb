@@ -1,0 +1,23 @@
+!!!
+%html{ moznomarginboxes: true, mozdisallowselectionprint: true }
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+    = display_meta_tags site: 'setlistdb', reverse: true
+    = csrf_meta_tags
+    = csp_meta_tag
+    %meta{:charset => "utf-8"}
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}
+    %meta{:content => "en-GB", :name => "language"}
+    %meta{:content => "en_GB", :name => "og:locale"}
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
+    %meta{:content => "true", :name => "HandheldFriendly"}
+    %meta{:content => "GB", :name => "geo.region"}
+
+    = stylesheet_pack_tag 'application', media: :all, 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', async: true, defer: true
+
+  %body
+    = render 'header'
+    = yield
+
+    = stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Lobster|News+Cycle:400,700', media: :all

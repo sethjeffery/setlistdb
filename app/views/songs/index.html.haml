@@ -1,0 +1,11 @@
+.container
+  - if can? :create, Version
+    .float-right
+      = link_to 'New song', new_song_path, class: 'btn btn-primary'
+
+  %h1 Songs
+
+  %ul
+    - @songs.each do |song|
+      %li
+        = link_to song.title, song

@@ -1,0 +1,109 @@
+@import '../principles/variables';
+
+.devise-links {
+  list-style: none;
+  text-align: center;
+  padding: 0;
+
+  * {
+    display: inline;
+  }
+
+  *:not(:first-child) {
+    &::before {
+      margin: 0 4px;
+      display: inline;
+      content: '• ';
+      color: $gray-400;
+    }
+  }
+}
+
+.center-form {
+  h2, h3 {
+    text-align: center;
+  }
+
+  form {
+    max-width: 480px;
+    margin: 1rem auto;
+    padding: 1.5rem;
+  }
+}
+
+
+$choices-button-icon-path: './choices';
+@import '~choices.js/assets/styles/scss/choices';
+
+.#{$choices-selector}__list--dropdown {
+  color: $dropdown-link-color;
+}
+
+.#{$choices-selector}__list--dropdown .#{$choices-selector}__item--selectable {
+  @media (min-width: 640px) {
+    padding-right: 0;
+  }
+}
+
+.#{$choices-selector}[data-type*="select-one"]:after {
+  border-color: currentColor transparent transparent;
+}
+
+.#{$choices-selector}[data-type*="select-one"].is-open:after {
+  border-color: transparent transparent currentColor;
+}
+
+.#{$choices-selector}__inner {
+  background-color: transparent;
+  padding: 7.5px 7.5px 3.75px;
+  border: 1px solid $input-border-color;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-radius: 0;
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-bottom-color: $body-color;
+  }
+}
+
+.#{$choices-selector} .description {
+  font-size: 12px;
+  color: rgba(black, 0.4);
+  word-break: break-word;
+  line-height: 1.25;
+  margin-top: .125rem;
+}
+
+.is-open .#{$choices-selector}__inner {
+  border-radius: 0;
+}
+
+.is-focused .#{$choices-selector}__inner, .is-open .#{$choices-selector}__inner {
+  border-color: $primary;
+}
+
+label:not(.col-form-label):not(.custom-control-label) {
+  font-size: 12px;
+  color: rgba($link-color, 0.75);
+  text-transform: uppercase;
+  margin-left: $input-btn-padding-x;
+}
+
+.form-control {
+  border-radius: 0;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+
+  &:hover:not(:focus) {
+    border-bottom-color: $body-color;
+  }
+}
+
+textarea.form-control {
+  &, &:focus {
+    background-color: mix($gray-100, $white);
+  }
+}

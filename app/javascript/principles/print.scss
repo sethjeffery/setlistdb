@@ -1,0 +1,40 @@
+@import 'variables';
+
+@media print {
+  @page { margin: 0; }
+
+  body {
+    margin: 1.6cm;
+  }
+
+  html {
+    font-size: .6cm;
+  }
+
+  .song-page {
+    max-width: initial;
+    box-shadow: none;
+    padding-left: 0;
+    margin: 0;
+    display: block;
+    color: black;
+  }
+
+  .song-section {
+    font-size: 1.5rem;
+  }
+
+  .no-print,
+  .tooltip {
+    display: none !important;
+  }
+
+  .song-section-title {
+    font-size: 1em;
+    opacity: 0.5;
+  }
+
+  .mt-negative {
+    margin-top: 0;
+  }
+}

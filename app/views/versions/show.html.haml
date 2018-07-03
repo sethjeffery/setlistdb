@@ -1,0 +1,46 @@
+.song.mt-negative
+  .navbar.navbar-expand-sm.no-print.bg-light
+    .container
+      - if @version.chords?
+        %button.btn.btn-info.js-toggle-chords
+          %i.fas.fa-check-square.mr-1
+          Chords
+
+      .ml-auto.d-flex
+        = link_to 'javascript:window.print()',
+                    class: 'float-right btn btn-outline-secondary ml-2',
+                    title: 'Print',
+                    data: { toggle: 'tooltip' } do
+          %i.fas.fa-print
+
+        - if can? :update, @version
+          = link_to edit_song_version_path(@song, @version),
+                    class: 'btn btn-primary ml-2',
+                    title: 'Edit',
+                    data: { toggle: 'tooltip' } do
+            %i.fas.fa-pen
+
+  .container
+    .row
+      .col.order-md-1
+        .song-page.ml-auto
+
+          %h1.song-title
+            = title @version.title
+
+          %h2.song-subtitle= @version.author
+
+          .text-hide
+            Lyrics and chords for #{@version.title}.
+
+          .song-content
+            = @version.to_html
+
+      .col-md-5.no-print.order-md-0
+        .card.mb-3
+          .card-body
+            = render '/versions/description'
+
+        .card.mb-3
+          .card-body.py-3
+            = render '/versions/versions'

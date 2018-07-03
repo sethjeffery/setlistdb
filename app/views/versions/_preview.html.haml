@@ -1,0 +1,6 @@
+.song-page.song-page--preview
+  %h1.song-title= @version.title.presence || 'Song title will be here'
+  %h2.song-subtitle= @version.author_name.presence || 'Author'
+
+  .song-content
+    = @version.to_html

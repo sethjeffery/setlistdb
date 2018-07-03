@@ -1,0 +1,36 @@
+$flags: 'au', 'gb', 'br', 'co', 'es', 'fr', 'gb', 'mx', 'pt', 'us';
+
+@each $flag in $flags {
+  .flag-#{$flag} {
+    background-image: url('flags/#{$flag}.svg');
+  }
+}
+
+[class*='flag-'] {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  .choices__item & {
+    vertical-align: top;
+    margin-right: 2px;
+  }
+}
+
+.flag-en {
+  @extend .flag-gb;
+}
+
+.flag-pt-br {
+  @extend .flag-br;
+}
+
+.fas, .fal, .far {
+  height: 1em;
+  min-width: 1em;
+  display: inline-block;
+  font-size: inherit;
+}

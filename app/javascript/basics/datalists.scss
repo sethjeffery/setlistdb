@@ -1,0 +1,27 @@
+@import '../principles/variables';
+
+dl {
+
+}
+
+dd {
+  margin-bottom: 0;
+
+  &.lead {
+    font-weight: normal;
+    font-size: 1.25em;
+  }
+}
+
+dt {
+  font-size: 1.125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-family: $headings-font-family;
+  line-height: 1.25;
+  color: $gray-500;
+
+  &:not(:first-child) {
+    margin-top: 1rem;
+  }
+}

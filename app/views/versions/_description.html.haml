@@ -1,0 +1,14 @@
+%dl.mb-0
+  %dt Title
+  %dd.lead= @version.title
+
+  - if @version.author
+    %dt Author
+    %dd.lead= @version.author
+
+  - if @version.key.present?
+    %dt Key
+    %dd.lead= @version.key
+
+  %dt Uploaded by
+  %dd.lead= @version.user

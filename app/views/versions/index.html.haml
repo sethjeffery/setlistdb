@@ -1,0 +1,9 @@
+.container
+  - if can? :create, Song
+    .mb-3
+      = link_to 'Add song', new_song_path, class: 'btn btn-primary'
+
+  %ul
+    - @songs.each do |song|
+      %li
+        = link_to song.title, song
