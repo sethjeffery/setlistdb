@@ -32,17 +32,6 @@
 
     .col-md-6
       .form-group
-        = f.label :lang
-        = f.select :lang,
-                   [['English', 'en'],
-                    ['Portuguese', 'pt'],
-                    ['Portuguese (Brazil)', 'pt-br'],
-                    ['Spanish', 'es']],
-                   {},
-                   class: 'custom-select',
-                   data: { icon: 'flag' }
-    .col-md-6
-      .form-group
         = f.label :version_type
         = f.select :version_type,
                    options_for_select([['Original', :original],
@@ -55,6 +44,17 @@
                            description_translation: 'A direct translation from the original language',
                            description_interpretation: 'A translation with new lyrics to fit the new language',
                            description_alternative: 'Alternative chords or lyrics to the original song' }
+    .col-md-6
+      .form-group
+        = f.label :lang
+        = f.select :lang,
+                   [['English', 'en'],
+                    ['Portuguese', 'pt'],
+                    ['Portuguese (Brazil)', 'pt-br'],
+                    ['Spanish', 'es']],
+                   {},
+                   class: 'custom-select',
+                   data: { icon: 'flag' }
 
   .form-group
     = f.label :content

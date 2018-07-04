@@ -1,7 +1,9 @@
 class VersionDecorator < ApplicationDecorator
   delegate_all
 
-  CHORD_REGEX = /\[([\w#+-\/]+)\]/
+  CHORD_REGEX = /[A-G](?:[b#])?(?:m|M|maj|MAJ|mM)?(?:[0-9]{0,2})(?:[b#+-][0-9])?(?:\/[A-G](?:[b#])?)?/
+  CHORDPRO_REGEX = /\[(#{CHORD_REGEX})]/
+  CHORDSIMPLE_REGEX = /^\s*(#{CHORD_REGEX})(?:\s+(#{CHORD_REGEX}))*\s*$/m
   TITLE_REGEX = /^:*(?:\d(st|nd|rd|th)\s)?(?:V|VERSE|CHORUS|PRE|PRE-?CHORUS|BRIDGE|CODA|INTRO|OUTRO|TAG)\s*\d*:*$/i
 
   def chords?
@@ -13,7 +15,7 @@ class VersionDecorator < ApplicationDecorator
     sections = content.to_s.split(/\r?\n(?:\r?\n)+/)
 
     sections.select(&:present?).each do |section|
-      has_chords = CHORD_REGEX.match?(section)
+      has_chords = CHORDPRO_REGEX.match?(section) || CHORDSIMPLE_REGEX.match?(section)
       html += h.content_tag(:div, class: "song-section #{'song-section--chorded' if has_chords}") do
 
         section_html = ''.html_safe
@@ -31,8 +33,8 @@ class VersionDecorator < ApplicationDecorator
           lines = lines[1...lines.length]
         end
 
-        lines.each do |line|
-          sanitized = h.sanitize(line).gsub(CHORD_REGEX, '<span class="chord">\1</span>').html_safe
+        as_chord_pro(lines).each do |line|
+          sanitized = h.sanitize(line).gsub(CHORDPRO_REGEX, '<span class="chord">\1</span>').html_safe
           line = h.content_tag(:div, sanitized, class: 'song-line')
           section_html += line
         end
@@ -43,5 +45,28 @@ class VersionDecorator < ApplicationDecorator
     end
 
     html
+  end
+
+  private
+
+  def as_chord_pro(lines)
+    output = []
+
+    lines.each_with_index do |line, index|
+      if CHORDSIMPLE_REGEX.match?(line) && index < lines.length && !CHORDSIMPLE_REGEX.match?(lines[index+1])
+        offset = 0
+        line.scan(CHORD_REGEX) do |match|
+          match_index = Regexp.last_match.offset(0)[0]
+          before = lines[index+1][0...(match_index + offset)]
+          after = lines[index+1][(match_index + offset)...(lines[index+1].length)]
+          lines[index+1] = "#{before}[#{match}]#{after}"
+          offset += match.length + 2
+        end
+      else
+        output << line
+      end
+    end
+
+    output
   end
 end

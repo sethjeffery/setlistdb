@@ -1,8 +1,10 @@
 import './song.scss';
 
-const CHORD_REGEX = /\[([\w#+-\/]+)\]/g;
+const CHORD_REGEX = /[A-G](?:[b#])?(?:m|M|maj|MAJ|mM)?(?:[0-9]{0,2})(?:[b#+-][0-9])?(?:\/[A-G](?:[b#])?)?/g;
+const CHORDPRO_REGEX = new RegExp(`\\[(${CHORD_REGEX.source})]`, 'g');
+const CHORDSIMPLE_REGEX = new RegExp(`^\\s*(${CHORD_REGEX.source})(?:\\s+(${CHORD_REGEX.source}))*\\s*$`, 'gm');
 const TITLE_REGEX = /^:*(?:\d(st|nd|rd|th)\s)?(?:V|VERSE|CHORUS|PRE|PRE-?CHORUS|BRIDGE|CODA|INTRO|OUTRO|TAG)\s*\d*:*$/i;
-const KEY_REGEX = /^[A|B|C|D|E|F|G](b|#)?m?$/
+const KEY_REGEX = /^[A-G][b#]?m?$/;
 
 function tag({ tag = 'div', className = '', content = '' }) {
   return `<${tag} class="${className}">${content}</${tag}>`;
@@ -32,6 +34,26 @@ function addSpacing(el) {
   }
 }
 
+function convertToChordPro(lines) {
+  const output = [];
+  let index = 0, match = null;
+  lines.forEach(line => {
+    if(line.match(CHORDSIMPLE_REGEX) && index < lines.length && !lines[index+1].match(CHORDSIMPLE_REGEX)) {
+      let offset = 0;
+      while(match = CHORD_REGEX.exec(line)) {
+        const before = lines[index+1].slice(0, match.index + offset);
+        const after = lines[index+1].slice(match.index + offset, lines[index+1].length);
+        lines[index+1] = `${before}[${match[0]}]${after}`;
+        offset += match[0].length + 2;
+      }
+    } else {
+      output.push(line);
+    }
+    index++;
+  });
+  return output;
+}
+
 function setContentHtml(el, content, key) {
   let html = '';
 
@@ -40,7 +62,7 @@ function setContentHtml(el, content, key) {
   tempEl.style.overflow = 'hidden';
   el.appendChild(tempEl);
 
-  if(!KEY_REGEX.test(key) && CHORD_REGEX.test(content)) {
+  if(!KEY_REGEX.test(key) && (CHORDPRO_REGEX.test(content) || CHORDSIMPLE_REGEX.test(content))) {
     el.innerHTML = "<div class='alert alert-warning'>Please specify a correct key for the song</div>";
     return false;
   }
@@ -48,7 +70,7 @@ function setContentHtml(el, content, key) {
   const sections = content.split(/\r?\n(?:\r?\n)+/);
 
   sections.filter(s => s).forEach(section => {
-    const hasChords = section.match(CHORD_REGEX);
+    const hasChords = section.match(CHORDPRO_REGEX) || section.match(CHORDSIMPLE_REGEX);
     let sectionHtml = '';
     let lines = section.split(/\r?\n/);
 
@@ -64,8 +86,8 @@ function setContentHtml(el, content, key) {
       lines = lines.slice(1, lines.length)
     }
 
-    lines.forEach(line => {
-      const sanitized = escapeHtml(line).replace(CHORD_REGEX, '<span class="chord">$1</span>');
+    convertToChordPro(lines).forEach(line => {
+      const sanitized = escapeHtml(line).replace(CHORDPRO_REGEX, '<span class="chord">$1</span>');
       sectionHtml += tag({ content: sanitized, className: 'song-line' });
     });
 
