@@ -1,0 +1,11 @@
+.jumbotron-fluid.jumbotron--intro.text-center{ class: "jumbotron--bg-#{Time.now.hour % 2}"}
+  %h1 A worship database for everyone.
+
+  = form_for :search, method: :get, url: search_path, html: { class: 'form--search' } do |f|
+    .form-group
+      %i.fas.fa-search.form-control-icon.form-control-lg-icon
+      = f.search_field :name,
+                       name: 'q',
+                       class: 'form-control form-control-lg',
+                       placeholder: 'Search songs by name',
+                       autofocus: true

@@ -7,11 +7,12 @@ import { faPen } from '@fortawesome/free-solid-svg-icons/faPen';
 import { faFile } from '@fortawesome/free-regular-svg-icons/faFile';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons/faPlusCircle';
 import { faPrint } from '@fortawesome/free-solid-svg-icons/faPrint'
+import { faSearch } from '@fortawesome/free-solid-svg-icons/faSearch'
 
 import './icons.scss';
 
 library.add(
-  faCheckSquare, faSquare, faPen, faFile, faPlusCircle, faPrint
+  faCheckSquare, faSquare, faPen, faFile, faPlusCircle, faPrint, faSearch
 );
 
 dom.watch();

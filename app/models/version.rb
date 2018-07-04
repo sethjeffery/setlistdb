@@ -1,4 +1,6 @@
 class Version < ApplicationRecord
+  include PgSearch
+
   attr_writer :author_name
   acts_as_list scope: :song
 
@@ -14,6 +16,9 @@ class Version < ApplicationRecord
   before_validation :check_create_song, on: :create
 
   scope :ordered, -> { order(:position) }
+  pg_search_scope :search_for,
+                  against: %i(title author_name lyrics),
+                  ignoring: :accents
 
   def check_create_author
     if !author && author_name.is_a?(String) && author_name.strip.present?

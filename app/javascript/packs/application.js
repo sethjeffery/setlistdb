@@ -19,7 +19,10 @@ import 'basics/icons';
 import 'components/song';
 import 'components/version';
 import 'components/header';
-import 'templates/login';
+import 'components/intro';
+import 'templates/layout';
+import 'templates/header';
+import 'templates/footer';
 
 import 'principles/print';
 

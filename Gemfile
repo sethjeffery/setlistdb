@@ -12,6 +12,7 @@ gem 'acts_as_list'
 
 # Database
 gem 'pg'
+gem 'pg_search'
 
 # Assets
 gem 'sass-rails', '~> 5.0'

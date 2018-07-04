@@ -109,3 +109,27 @@ textarea.form-control {
     background-color: mix($gray-100, $white);
   }
 }
+
+.form-group {
+  position: relative;
+}
+
+.form-control-icon {
+  position: absolute;
+  pointer-events: none;
+  left: .75rem;
+  top: .875rem;
+
+  ~ .form-control {
+    padding-left: 2.25rem;
+  }
+}
+
+.form-control-lg-icon {
+  left: 1rem;
+  top: 1rem;
+
+  ~ .form-control {
+    padding-left: 2.5rem;
+  }
+}

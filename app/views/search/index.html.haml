@@ -1,0 +1,24 @@
+.container
+  = form_for :search, method: :get, url: search_path, html: { class: 'form--search' } do |f|
+    .form-group
+      %i.fas.fa-search.form-control-icon
+      = f.search_field :name,
+                       name: 'q',
+                       value: params[:q],
+                       class: 'form-control',
+                       placeholder: 'Search songs by name'
+
+  %ul.versions
+    - @versions.each do |version|
+      %li
+        = link_to song_version_path(version.song, version), class: "version #{'active' if version == @version}" do
+          - if version.lang
+            %i.version-icon{class: "flag-#{version.lang}"}
+
+          %div
+            %span.version-title= version.title
+            - if version.key.present?
+              in #{version.key}
+
+          - if version.author
+            .version-subtitle= version.author

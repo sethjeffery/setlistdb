@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_28_193747) do
+ActiveRecord::Schema.define(version: 2018_07_04_222825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "unaccent"
 
   create_table "authors", force: :cascade do |t|
     t.string "name"
@@ -78,6 +79,7 @@ ActiveRecord::Schema.define(version: 2018_06_28_193747) do
     t.integer "position", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "author_name"
     t.index ["author_id"], name: "index_versions_on_author_id"
     t.index ["lang"], name: "index_versions_on_lang"
     t.index ["song_id", "position"], name: "index_versions_on_song_id_and_position"

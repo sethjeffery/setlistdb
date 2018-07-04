@@ -1,0 +1,16 @@
+@import '../principles/variables';
+
+#footer {
+  margin-top: auto;
+  background-color: $gray-100;
+  color: $gray-600;
+
+  .container {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-size: .75rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

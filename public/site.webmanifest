@@ -1,0 +1,19 @@
+{
+    "name": "Setlist.db",
+    "short_name": "Setlist.db",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-256x256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#664b96",
+    "background_color": "#664b96",
+    "display": "standalone"
+}
