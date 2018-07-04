@@ -46,6 +46,10 @@
     color: white;
   }
 
+  :-webkit-autofill ~ .form-control-icon {
+    color: black;
+  }
+
   .form-control-lg {
     border-radius: 1.5rem;
     background-color: rgba(black, 0.25);

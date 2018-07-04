@@ -117,19 +117,19 @@ textarea.form-control {
 .form-control-icon {
   position: absolute;
   pointer-events: none;
-  left: .75rem;
+  left: 1rem;
   top: .875rem;
+}
 
-  ~ .form-control {
-    padding-left: 2.25rem;
-  }
+.form-control-icon  ~ .form-control, .form-control-with-icon {
+  padding-left: 2.5rem;
 }
 
 .form-control-lg-icon {
-  left: 1rem;
+  left: 1.25rem;
   top: 1rem;
+}
 
-  ~ .form-control {
-    padding-left: 2.5rem;
-  }
+.form-control-icon  ~ .form-control-lg, .form-control-with-icon.form-control-lg {
+  padding-left: 3rem;
 }

@@ -3,9 +3,9 @@
 
   = form_for :search, method: :get, url: search_path, html: { class: 'form--search' } do |f|
     .form-group
-      %i.fas.fa-search.form-control-icon.form-control-lg-icon
       = f.search_field :name,
                        name: 'q',
-                       class: 'form-control form-control-lg',
+                       class: 'form-control form-control-lg form-control-with-icon',
                        placeholder: 'Search songs by name',
                        autofocus: true
+      %i.fas.fa-search.form-control-icon.form-control-lg-icon
