@@ -8,4 +8,6 @@ Rails.application.routes.draw do
 
   resources :users
   get 'search', to: 'search#index'
+  get 'terms', to: 'terms#index'
+  get 'privacy', to: 'terms#privacy'
 end

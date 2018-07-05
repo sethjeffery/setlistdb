@@ -1,0 +1,138 @@
+%nav.bg-light.py-2.mt-negative.mb-4
+  .container
+    %ul.nav.nav-pills
+      %li.nav-item.py-2.pr-3.text-muted
+        Legal
+      %li.nav-item
+        = link_to 'Terms and conditions', terms_path, class: 'nav-link'
+      %li.nav-item
+        = link_to 'Privacy Policy', privacy_path, class: 'nav-link active'
+
+.container
+  %h1 Privacy Policy
+  %p.upcase.text-muted July 05, 2018
+
+  %p
+    #{site_name} ("us", "we", or "our") operates the
+    = link_to site_domain, "//#{site_domain}"
+    website (the "Service").
+
+  %h3.mt-5.mb-0 1. Data Collected
+  %p.lead.text-info
+    We collect some personal information, but do not share it with advertisers.
+
+  %p
+    We collect your <strong>email address</strong>, your <strong>full name</strong> and <strong>photo</strong>
+    when you register via a social site (e.g. Facebook).
+
+  %p
+    We use <strong>Google Analytics</strong> to anonymously analyse usage of our site, without sharing
+    any personally identifiable information. The kind of information we send to Google Analytics is:
+    %ol{ type: 'a' }
+      %li your browser (e.g. Chrome, IE, Safari);
+      %li your country and locale (not your exact address);
+      %li the pages you visit on the site;
+      %li how much time you spent on the site.
+
+  %p
+    The only cookies we need to store on your computer are:
+    %ol{ type: 'a' }
+      %li Session ID (required for sign-in)
+      %li Google Analytics (optional)
+
+  %p
+    We use your data to provide and improve the Service. By using the Service, you agree to the collection and
+    use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, terms
+    used in this Privacy Policy have the same meanings as in our #{link_to "Terms and Conditions", terms_path}.
+
+  %h3.mt-5.mb-0 2. Use of Data
+  %p.lead.text-info
+    We use your data responsibly to improve our site and provide the service.
+
+  %p
+    #{site_name} uses the collected data for various purposes:
+    %ol{ type: 'a' }
+      %li to provide and maintain the Service;
+      %li to notify you about changes to our Service;
+      %li to allow you to upload content and manage your account;
+      %li to provide customer care and support;
+      %li to provide analysis and valuable critique for the sake of improving our Service;
+      %li to monitor the usage of the Service;
+      %li to detect, prevent and address technical issues.
+
+  %h3.mt-5.mb-0 3. Transfer Of Data
+  %p.lead.text-info
+    Our data servers are in the cloud, and so will your data be.
+
+  %p
+    Your information, including Personal Data, may be transferred to — and maintained on — computers located
+    outside of your state, province, country or other governmental jurisdiction where the data
+    protection laws may differ than those from your jurisdiction.
+
+  %p
+    Your consent to this Privacy Policy followed by your submission of such information
+    represents your agreement to transferring data to our servers.
+
+  %p
+    #{site_name} will take all steps reasonably necessary to ensure that your data is treated securely and
+    in accordance with this Privacy Policy and no transfer of your Personal Data will take place to an
+    organization or a country unless there are adequate controls in place including the security of
+    your data and other personal information.
+
+  %h3.mt-5.mb-0 4. Disclosure Of Data
+  %p.lead.text-info
+    We only disclose your data when it's legally necessary.
+
+  %p
+    #{site_name} may disclose your Personal Data in the good faith belief that such action is necessary to:
+    %ol{ type: 'a' }
+      %li comply with a legal obligation;
+      %li protect and defend the rights or property of #{site_name};
+      %li prevent or investigate possible wrongdoing in connection with the Service;
+      %li protect the personal safety of users of the Service or the public;
+      %li protect against legal liability.
+
+  %h3.mt-5.mb-0 5. Security Of Data
+  %p.lead.text-info
+    We aim to be professional with data, but cannot promise 100% security.
+  %p
+    The security of your data is important to us, but remember that no method of transmission over
+    the Internet, or method of electronic storage is 100% secure. While we strive to use commercially
+    acceptable means (such as encryption) to protect your Personal Data, we cannot guarantee its absolute security.
+
+  %h3.mt-5.mb-0 6. Service Providers
+  %p.lead.text-info
+    We employ professional services to help us with web hosting, email, logging, etc.
+  %p
+    We may employ third party companies and individuals to facilitate our Service ("Service Providers"),
+    to provide the Service on our behalf, to perform Service-related services or to assist us in
+    analyzing how our Service is used.
+  %p
+    These third parties have access to your Personal Data only to perform these tasks on our behalf
+    and are obligated not to disclose or use it for any other purpose.
+
+  %h3.mt-5.mb-0 7. Children's Privacy
+  %p.lead.text-info
+    Under-18s cannot create an account.
+  %p
+    Our Service does not permit anyone under the age of 18 ("Children") to create an account or
+    provide personally identifiable information.
+  %p
+    If you are a parent or guardian and you are aware that your Children has provided us with Personal
+    Data, please contact us. If we become aware that we have collected Personal Data from children without
+    verification of parental consent, we take steps to remove that information from our servers.
+
+  %h3.mt-5.mb-0 8. Changes To This Privacy Policy
+  %p.lead.text-info
+    This policy may change in the future.
+  %p
+    We may update our Privacy Policy from time to time. We will do our best to notify you of any changes
+    by posting the new Privacy Policy on this page and/or sending out emails.
+  %p
+    You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy
+    Policy are effective when they are posted on this page.
+
+  %hr.my-4
+  %p
+    If you have any questions about this policy or about personal data, please contact
+    = mail_to "seth@sethjeffery.com", "seth@sethjeffery.com", encode: "javascript"
