@@ -1,9 +1,29 @@
 .avatar {
-  width: 2em;
-  height: 2em;
   display: inline-block;
-  border-radius: 2em;
+  border-radius: 100%;
   vertical-align: top;
-  margin: -.25rem;
-  box-shadow: 0 1px 1px rgba(black, 0.5);
+  width: 4rem;
+  height: 4rem;
+
+  .navbar & {
+    width: 2em;
+    height: 2em;
+    margin: -.25rem 0;
+    box-shadow: 0 1px 1px rgba(black, 0.5);
+  }
+
+  h1 & {
+    width: 1em;
+    height: 1em;
+    margin: .125em 0;
+  }
+}
+
+.avatar--hr {
+  margin: 1.5rem auto -2rem;
+  display: block;
+
+  + hr {
+    margin: 0 0 3.5rem;
+  }
 }

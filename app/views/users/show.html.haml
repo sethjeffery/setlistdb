@@ -1,0 +1,56 @@
+.container
+  .text-center
+    - if @user == current_user
+      %h1= title "Your Profile"
+      .upcase.text-muted You are connected with Facebook
+    - else
+      %h1= title @user.name
+
+  = image_tag @user.image, class: 'avatar avatar--hr', alt: 'Profile picture'
+  %hr
+
+  .row
+    .col-sm-6.mb-4
+      .card
+        - if @user.versions.present?
+          - if @user == current_user && can?(:create, Version)
+            .card-header
+              = link_to new_song_path, class: "version" do
+                %i.version-icon.fas.fa-plus-circle.fa-fw
+                .version-title
+                  Add new song
+            .card-body
+              %ul.versions
+                - @user.versions.each do |version|
+                  %li
+                    = link_to song_version_path(version.song, version), class: "version" do
+                      - if version.lang
+                        %i.version-icon{class: "flag-#{version.lang}"}
+
+                      %div
+                        %span.version-title= version.title
+                        - if version.key.present?
+                          in #{version.key}
+
+                      - if version.author
+                        .version-subtitle= version.author
+
+        - elsif @user == current_user
+          .card
+            %p You have not added any songs to the database yet.
+            = link_to new_song_path, class: 'btn btn-primary' do
+              %i.fas.fa-plus-circle.mr-1
+              Add your first song
+
+        - else
+          .card
+            #{@user} has not added any songs to the
+            database yet.
+
+    .col-sm-6.mb-4
+      %dl
+        %dt Contributions
+        %dd.lead= @user.versions.count
+
+        %dt Member since
+        %dd.lead= @user.created_at.strftime('%B %Y')

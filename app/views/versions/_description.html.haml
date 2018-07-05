@@ -11,4 +11,5 @@
     %dd.lead= @version.key
 
   %dt Uploaded by
-  %dd.lead= @version.user
+  %dd.lead
+    = link_to @version.user, @version.user

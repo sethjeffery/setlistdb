@@ -28,7 +28,8 @@
           %h1.song-title
             = title @version.title
 
-          %h2.song-subtitle= @version.author
+          %h2.song-subtitle
+            = @version.author
 
           .text-hide
             Lyrics and chords for #{@version.title}.
@@ -42,5 +43,5 @@
             = render '/versions/description'
 
         .card.mb-3
-          .card-body.py-3
+          .card-body
             = render '/versions/versions'

@@ -1,7 +1,6 @@
 class Version < ApplicationRecord
   include PgSearch
 
-  attr_writer :author_name
   acts_as_list scope: :song
 
   belongs_to :song
@@ -15,6 +14,7 @@ class Version < ApplicationRecord
 
   before_validation :check_create_author
   before_validation :check_create_song, on: :create
+  before_validation :set_author_name
 
   scope :ordered, -> { order(:position) }
   pg_search_scope :search_for,
@@ -37,11 +37,11 @@ class Version < ApplicationRecord
     position.to_s
   end
 
-  def author_name
-    @author_name || author&.name
-  end
-
   def clean_up_song
     song.destroy if song.reload.versions.count.zero?
+  end
+
+  def set_author_name
+    self.author_name = author&.name
   end
 end

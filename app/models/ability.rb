@@ -36,6 +36,7 @@ class Ability
       can :create, Song
       can :create, Version
       can :update, Version, user_id: user.id
+      can :manage, user
     end
   end
 end
