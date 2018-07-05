@@ -9,6 +9,7 @@ gem 'puma', '~> 3.11'
 gem 'haml-rails'
 gem 'draper'
 gem 'acts_as_list'
+gem 'actionview-encoded_mail_to'
 
 # Database
 gem 'pg'

@@ -66,7 +66,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "setlistdb_#{Rails.env}"
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: 'setlistdb.com' }
+  config.action_mailer.default_url_options = { host: ENV['DOMAIN'].replace(/www/, '') }
 
   config.action_mailer.smtp_settings = {
     :user_name => ENV['SENDGRID_USERNAME'],
@@ -104,4 +104,6 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.x.domain = ENV['DOMAIN']
 end

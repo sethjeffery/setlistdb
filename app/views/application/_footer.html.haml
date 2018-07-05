@@ -1,4 +1,9 @@
 #footer
   .container
-    &copy;
-    Setlist⋅db #{Date.current.year}
+    %div
+      &copy;
+      #{site_name} #{Date.current.year}
+    %div.ml-auto
+      = link_to 'Terms', terms_path
+      &sdot;
+      = link_to 'Privacy', privacy_path
