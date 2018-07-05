@@ -36,14 +36,14 @@
                         .version-subtitle= version.author
 
         - elsif @user == current_user
-          .card
+          .card-body
             %p You have not added any songs to the database yet.
             = link_to new_song_path, class: 'btn btn-primary' do
               %i.fas.fa-plus-circle.mr-1
               Add your first song
 
         - else
-          .card
+          .card-body
             #{@user} has not added any songs to the
             database yet.
 
