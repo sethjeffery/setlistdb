@@ -66,12 +66,12 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "setlistdb_#{Rails.env}"
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: ENV['DOMAIN'].replace(/www/, '') }
+  config.action_mailer.default_url_options = { host: ENV['DOMAIN'].sub(/www/, '') }
 
   config.action_mailer.smtp_settings = {
     :user_name => ENV['SENDGRID_USERNAME'],
     :password => ENV['SENDGRID_PASSWORD'],
-    :domain => ENV['DOMAIN'],
+    :domain => ENV['DOMAIN'].sub(/www/, ''),
     :address => 'smtp.sendgrid.net',
     :port => 587,
     :authentication => :plain,
