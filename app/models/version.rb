@@ -8,6 +8,7 @@ class Version < ApplicationRecord
   belongs_to :user
   belongs_to :author, optional: true
 
+  after_destroy :clean_up_song
   enum version_type: %i[original translation interpretation alternative]
 
   validates_presence_of :title, :content
@@ -38,5 +39,9 @@ class Version < ApplicationRecord
 
   def author_name
     @author_name || author&.name
+  end
+
+  def clean_up_song
+    song.destroy if song.reload.versions.count.zero?
   end
 end

@@ -28,10 +28,14 @@ gem 'turbolinks', '~> 5'
 gem 'cancancan'
 gem 'devise'
 gem 'draper-cancancan'
+gem 'omniauth-facebook'
 
 # SEO
 gem 'meta-tags'
 gem 'friendly_id'
+
+# Configuration
+gem 'envyable'
 
 # Use CoffeeScript for .coffee assets and views
 # gem 'coffee-rails', '~> 4.2'

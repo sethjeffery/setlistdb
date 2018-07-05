@@ -16,6 +16,7 @@ import 'basics/typography';
 import 'basics/datalists';
 import 'basics/form';
 import 'basics/icons';
+import 'basics/avatars';
 import 'components/song';
 import 'components/version';
 import 'components/header';

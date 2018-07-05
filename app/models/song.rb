@@ -4,7 +4,7 @@ class Song < ApplicationRecord
 
   belongs_to :author, optional: true
   has_one :first_version, -> { ordered }, class_name: 'Version'
-  has_many :versions, -> { ordered }
+  has_many :versions, -> { ordered }, dependent: :destroy
 
   validates_presence_of :title
 

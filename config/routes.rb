@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+    omniauth_callbacks: 'users/omniauth_callbacks'
+  }
+
   root to: "home#index"
 
   resources :songs do
@@ -7,6 +10,7 @@ Rails.application.routes.draw do
   end
 
   resources :users
+
   get 'search', to: 'search#index'
   get 'terms', to: 'terms#index'
   get 'privacy', to: 'terms#privacy'

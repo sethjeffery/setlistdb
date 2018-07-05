@@ -10,7 +10,11 @@
         %ul.nav.navbar-nav.ml-auto
           - if user_signed_in?
             %li.nav-item
-              = link_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-link'
+              = link_to current_user, class: 'nav-link' do
+                = image_tag current_user.image, class: 'avatar mr-2'
+                = current_user.name
           - else
             %li.nav-item
-              = link_to 'Log in', new_user_session_path, class: 'nav-link'
+              = link_to user_facebook_omniauth_authorize_path, class: 'nav-link' do
+                %i.fab.fa-facebook-square.mr-1
+                Log in
