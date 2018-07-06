@@ -19,21 +19,21 @@
                 %i.version-icon.fas.fa-plus-circle.fa-fw
                 .version-title
                   Add new song
-            .card-body
-              %ul.versions
-                - @user.versions.each do |version|
-                  %li
-                    = link_to song_version_path(version.song, version), class: "version" do
-                      - if version.lang
-                        %i.version-icon{class: "flag-#{version.lang}"}
+          .card-body
+            %ul.versions
+              - @user.versions.each do |version|
+                %li
+                  = link_to song_version_path(version.song, version), class: "version" do
+                    - if version.lang
+                      %i.version-icon{class: "flag-#{version.lang}"}
 
-                      %div
-                        %span.version-title= version.title
-                        - if version.key.present?
-                          in #{version.key}
+                    %div
+                      %span.version-title= version.title
+                      - if version.key.present?
+                        in #{version.key}
 
-                      - if version.author
-                        .version-subtitle= version.author
+                    - if version.author
+                      .version-subtitle= version.author
 
         - elsif @user == current_user
           .card-body
