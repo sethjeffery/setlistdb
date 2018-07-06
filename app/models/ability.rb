@@ -37,6 +37,10 @@ class Ability
       can :create, Version
       can :update, Version, user_id: user.id
       can :manage, user
+
+      if user.admin?
+        can :manage, :all
+      end
     end
   end
 end

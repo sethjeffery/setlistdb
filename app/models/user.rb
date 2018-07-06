@@ -9,6 +9,8 @@ class User < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
 
+  validates_inclusion_of :role, within: %w[admin], allow_nil: true
+
   def to_s
     name.presence || email.split('@').first
   end
@@ -25,4 +27,7 @@ class User < ApplicationRecord
     end
   end
 
+  def admin?
+    role == 'admin'
+  end
 end
