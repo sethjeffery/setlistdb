@@ -10,7 +10,7 @@
   %hr
 
   .row
-    .col-sm-6.mb-4
+    .col-sm-6.offset-lg-2.mb-4
       .card
         - if @user.versions.present?
           - if @user == current_user && can?(:create, Version)
@@ -47,7 +47,7 @@
             #{@user} has not added any songs to the
             database yet.
 
-    .col-sm-6.mb-4
+    .col
       %dl
         %dt Contributions
         %dd.lead= @user.versions.count
