@@ -9,7 +9,7 @@
   = image_tag @user.image, class: 'avatar avatar--hr', alt: 'Profile picture'
   %hr
 
-  .row
+  .row.mb-4
     .col-sm-6.offset-lg-2.mb-4
       .card
         - if @user.versions.present?
@@ -54,3 +54,9 @@
 
         %dt Member since
         %dd.lead= @user.created_at.strftime('%B %Y')
+
+  - if @user == current_user
+    .my-4.text-center
+      = link_to logout_path, method: :delete, class: 'btn btn-sm btn-outline-secondary' do
+        %i.fas.fa-sign-out-alt
+        Sign out
