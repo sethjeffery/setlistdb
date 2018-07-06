@@ -1,5 +1,5 @@
 %header#header
-  %nav.navbar.navbar-expand-sm.no-print.bg-purple.navbar-dark
+  %nav.navbar.navbar-expand.no-print.bg-purple.navbar-dark
     .container
       = link_to site_name, '/', class: 'navbar-brand'
 
@@ -11,8 +11,8 @@
           - if user_signed_in?
             %li.nav-item
               = link_to current_user, class: 'nav-link' do
-                = image_tag current_user.image, class: 'avatar mr-2'
-                = current_user.name
+                = image_tag current_user.image, class: 'avatar'
+                %span.d-none.d-sm-inline.ml-2= current_user.name
           - else
             %li.nav-item
               = link_to user_facebook_omniauth_authorize_path, class: 'nav-link' do
