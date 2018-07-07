@@ -36,8 +36,8 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}-{{ checksum "package.json" }}
 
       - run:
-        name: Javascript tests
-        command: yarn test
+          name: Javascript tests
+          command: yarn test
 
       # Database setup
       - run: bundle exec rake db:create
