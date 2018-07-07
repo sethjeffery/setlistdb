@@ -1,0 +1,14 @@
+@import '../principles/variables';
+
+.toolbar {
+  background-color: $gray-100;
+  pointer-events: none;
+
+  .btn {
+    pointer-events: auto;
+  }
+}
+
+.has-toolbar {
+  max-height: calc(100vh - 50px - .5rem);
+}

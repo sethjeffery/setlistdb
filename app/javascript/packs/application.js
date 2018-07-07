@@ -21,6 +21,7 @@ import 'components/song';
 import 'components/version';
 import 'components/header';
 import 'components/intro';
+import 'components/toolbar';
 import 'templates/layout';
 import 'templates/header';
 import 'templates/footer';

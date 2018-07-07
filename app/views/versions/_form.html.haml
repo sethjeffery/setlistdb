@@ -58,7 +58,19 @@
 
   .form-group
     = f.label :content
-    = f.text_area :content, class: 'form-control', rows: 10
+    .form-group
+      .toolbar.px-2.py-1
+        .form-row
+          .col-auto.py-1
+            .btn-group#btn-group-chords
+              - chords_of(@version.key.presence || 'G').each do |chord|
+                - if chord.end_with?('m')
+                  .btn.btn-sm.btn-secondary.js-add-chord
+                    = chord
+                - else
+                  .btn.btn-sm.btn-info.js-add-chord
+                    = chord
+      = f.text_area :content, class: 'form-control has-toolbar', rows: 16
 
   - if @version.errors.present?
     .form-group

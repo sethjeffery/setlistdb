@@ -1,4 +1,5 @@
 import './song.scss';
+import {chordsOf} from '../principles/transposer';
 
 const CHORD_REGEX = /[A-G](?:[b#])?(?:m|M|maj|MAJ|mM)?(?:[0-9]{0,2})(?:[b#+-][0-9])?(?:\/[A-G](?:[b#])?)?/g;
 const CHORDPRO_REGEX = new RegExp(`\\[(${CHORD_REGEX.source})]`, 'g');
@@ -54,18 +55,13 @@ function convertToChordPro(lines) {
   return output;
 }
 
-function setContentHtml(el, content, key) {
+function setContentHtml(el, content) {
   let html = '';
 
   const tempEl = document.createElement('div');
   tempEl.style.position = 'absolute';
   tempEl.style.overflow = 'hidden';
   el.appendChild(tempEl);
-
-  if(!KEY_REGEX.test(key) && (CHORDPRO_REGEX.test(content) || CHORDSIMPLE_REGEX.test(content))) {
-    el.innerHTML = "<div class='alert alert-warning'>Please specify a correct key for the song</div>";
-    return false;
-  }
 
   const sections = content.split(/\r?\n(?:\r?\n)+/);
 
@@ -111,6 +107,18 @@ function updatePreview({ content, title, author, key }) {
   subtitleEl.innerHTML = author.value;
 }
 
+function updateChords({ key }) {
+  const btnGroupChords = document.getElementById('btn-group-chords');
+  const chords = chordsOf(key.value ? key.value : 'G');
+  btnGroupChords.innerHTML = chords.map(chord => {
+    if(/m$/.test(chord)) {
+      return `<div class="btn btn-sm btn-secondary js-add-chord">${chord}</div>`;
+    } else {
+      return `<div class="btn btn-sm btn-info js-add-chord">${chord}</div>`;
+    }
+  }).join('');
+}
+
 function observeContentChanges() {
   const content = document.querySelector('textarea[name="version[content]"]');
   const title = document.querySelector('input[name="version[title]"]');
@@ -119,10 +127,12 @@ function observeContentChanges() {
 
   const observeChange = function() {
     updatePreview({ content, title, author, key });
+    updateChords({ key });
   };
 
   if(content) {
     content.addEventListener('input', observeChange, { passive: true });
+    content.addEventListener('change', observeChange, { passive: true });
     title.addEventListener('input', observeChange, { passive: true });
     author.addEventListener('input', observeChange, { passive: true });
     key.addEventListener('input', observeChange, { passive: true });

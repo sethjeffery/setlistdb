@@ -91,7 +91,7 @@ label:not(.col-form-label):not(.custom-control-label) {
   margin-left: $input-btn-padding-x;
 }
 
-.form-control {
+input.form-control {
   border-radius: 0;
   border-top-color: transparent;
   border-left-color: transparent;
@@ -105,9 +105,7 @@ label:not(.col-form-label):not(.custom-control-label) {
 textarea.form-control {
   font-family: $font-family-monospace;
   font-size: .875rem;
-  &, &:focus {
-    background-color: mix($gray-100, $white);
-  }
+  border-radius: 0;
 }
 
 .form-group {
