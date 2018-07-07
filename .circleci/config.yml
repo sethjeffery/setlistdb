@@ -10,6 +10,7 @@ jobs:
         environment:
           RAILS_ENV: test
           DATABASE_URL: postgresql://setlistdb@localhost/setlistb_test
+          BUNDLE_PATH: vendor/cache
       - image: circleci/postgres:9.4
         environment:
           POSTGRES_USER: setlistdb
