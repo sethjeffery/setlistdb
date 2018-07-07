@@ -26,7 +26,6 @@ jobs:
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "Gemfile.lock" }}-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
       - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
@@ -39,12 +38,11 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}-{{ checksum "package.json" }}
 
-      - run:
-          name: Javascript tests
-          command: yarn test
+      # Javascript tests!
+      - run: yarn test
 
       # Database setup
       - run: bundle exec rails db:create db:schema:load db:migrate
 
-      # run tests!
-      - run: bundle exec rails test
+      # Ruby tests!
+      - run: bundle exec rake
