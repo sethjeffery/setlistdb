@@ -6,9 +6,15 @@ version: 2
 jobs:
   build:
     docker:
-      # specify the version you desire here
-       - image: circleci/ruby:2.4.4-node-browsers
-       - image: circleci/postgres:9.4
+      - image: circleci/ruby:2.4.4-node-browsers
+        environment:
+          RAILS_ENV: test
+          DATABASE_URL: postgresql://root@localhost/setlistb_test
+      - image: circleci/postgres:9.4
+        environment:
+          POSTGRES_USER: setlistdb
+          POSTGRES_DB: setlistdb_test
+          POSTGRES_PASSWORD: ""
 
     working_directory: ~/repo
 
@@ -40,8 +46,7 @@ jobs:
           command: yarn test
 
       # Database setup
-      - run: bundle exec rake db:create
-      - run: bundle exec rake db:schema:load
+      - run: RAILS_ENV=test bundle exec rails db:create db:schema:load
 
       # run tests!
       - run:
