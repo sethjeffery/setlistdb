@@ -28,11 +28,7 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run:
-          name: bundle install
-          command: |
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
-
+      - run: bundle install --without development
       - run: yarn install
 
       - save_cache:
