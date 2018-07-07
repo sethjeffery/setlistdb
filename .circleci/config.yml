@@ -46,11 +46,3 @@ jobs:
 
       # run tests!
       - run: bundle exec rails test
-
-      # collect reports
-      - store_test_results:
-          path: /tmp/test-results
-
-      - store_artifacts:
-          path: /tmp/test-results
-          destination: test-results
