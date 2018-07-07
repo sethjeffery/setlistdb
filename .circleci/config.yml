@@ -9,7 +9,7 @@ jobs:
       - image: circleci/ruby:2.4.4-node-browsers
         environment:
           RAILS_ENV: test
-          DATABASE_URL: postgresql://root@localhost/setlistb_test
+          DATABASE_URL: postgresql://setlistdb@localhost/setlistb_test
       - image: circleci/postgres:9.4
         environment:
           POSTGRES_USER: setlistdb
