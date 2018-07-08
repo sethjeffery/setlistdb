@@ -1,11 +1,10 @@
 import './song.scss';
-import {chordsOf} from '../principles/transposer';
+import addSelectorEventListener from '../principles/addSelectorEventListener';
 
 const CHORD_REGEX = /[A-G](?:[b#])?(?:m|M|maj|MAJ|mM)?(?:[0-9]{0,2})(?:[b#+-][0-9])?(?:\/[A-G](?:[b#])?)?/g;
 const CHORDPRO_REGEX = new RegExp(`\\[(${CHORD_REGEX.source})]`, 'g');
 const CHORDSIMPLE_REGEX = new RegExp(`^\\s*(${CHORD_REGEX.source})(?:\\s+(${CHORD_REGEX.source}))*\\s*$`, 'gm');
 const TITLE_REGEX = /^:*(?:\d(st|nd|rd|th)\s)?(?:V|VERSE|CHORUS|PRE|PRE-?CHORUS|BRIDGE|CODA|INTRO|OUTRO|TAG)\s*\d*:*$/i;
-const KEY_REGEX = /^[A-G][b#]?m?$/;
 
 function tag({ tag = 'div', className = '', content = '' }) {
   return `<${tag} class="${className}">${content}</${tag}>`;
@@ -107,27 +106,14 @@ function updatePreview({ content, title, author, key }) {
   subtitleEl.innerHTML = author.value;
 }
 
-function updateChords({ key }) {
-  const btnGroupChords = document.getElementById('btn-group-chords');
-  const chords = chordsOf(key.value ? key.value : 'G');
-  btnGroupChords.innerHTML = chords.map(chord => {
-    if(/m$/.test(chord)) {
-      return `<div class="btn btn-sm btn-secondary js-add-chord">${chord}</div>`;
-    } else {
-      return `<div class="btn btn-sm btn-info js-add-chord">${chord}</div>`;
-    }
-  }).join('');
-}
-
 function observeContentChanges() {
-  const content = document.querySelector('textarea[name="version[content]"]');
-  const title = document.querySelector('input[name="version[title]"]');
-  const author = document.querySelector('input[name="version[author_name]"]');
-  const key = document.querySelector('input[name="version[key]"]');
+  const content = document.getElementById('version_content');
+  const title = document.getElementById('version_title');
+  const author = document.getElementById('version_author_name');
+  const key = document.getElementById('version_key');
 
   const observeChange = function() {
     updatePreview({ content, title, author, key });
-    updateChords({ key });
   };
 
   if(content) {
@@ -144,20 +130,19 @@ function observeContentChanges() {
 observeContentChanges();
 document.addEventListener('turbolinks:load', observeContentChanges);
 
-document.addEventListener('click', e => {
-  const el = e.target;
+addSelectorEventListener('.js-toggle-chords', 'click', function(e) {
   const preview = document.querySelector('.song-page');
 
-  if(el.classList.contains('js-toggle-chords')) {
-    if(el.classList.contains('btn-info')) {
-      el.classList.remove('btn-info');
-      el.classList.add('btn-outline-secondary');
-      el.innerHTML = `<i class='far fa-square mr-1'></i> ${el.innerText}`;
+  if(this.classList.contains('js-toggle-chords')) {
+    if(this.classList.contains('btn-info')) {
+      this.classList.remove('btn-info');
+      this.classList.add('btn-outline-secondary');
+      this.innerHTML = `<i class='far fa-square mr-1'></i> ${this.innerText}`;
       preview.classList.add('song-page--hide-chords');
     } else {
-      el.classList.remove('btn-outline-secondary');
-      el.classList.add('btn-info');
-      el.innerHTML = `<i class='fas fa-check-square mr-1'></i> ${el.innerText}`;
+      this.classList.remove('btn-outline-secondary');
+      this.classList.add('btn-info');
+      this.innerHTML = `<i class='fas fa-check-square mr-1'></i> ${this.innerText}`;
       preview.classList.remove('song-page--hide-chords');
     }
   }

@@ -1,15 +1,18 @@
 import './toolbar.scss';
+import {chordsOf} from 'principles/transposer';
+import trigger from 'principles/trigger';
+import addSelectorEventListener from '../principles/addSelectorEventListener';
 
-function trigger(el, eventName, detail={}) {
-  let event;
-  if (window.CustomEvent) {
-    event = new CustomEvent(eventName);
-  } else {
-    event = document.createEvent('CustomEvent', { detail });
-    event.initCustomEvent(eventName, true, true, detail);
-  }
-
-  el.dispatchEvent(event);
+function updateChords() {
+  const btnGroupChords = document.getElementById('btn-group-chords');
+  const chords = chordsOf(this.value ? this.value : 'G');
+  btnGroupChords.innerHTML = chords.map(chord => {
+    if(/m$/.test(chord)) {
+      return `<div class="btn btn-sm btn-secondary js-add-chord">${chord}</div>`;
+    } else {
+      return `<div class="btn btn-sm btn-info js-add-chord">${chord}</div>`;
+    }
+  }).join('');
 }
 
 function insertAtCursor(el, value) {
@@ -17,6 +20,7 @@ function insertAtCursor(el, value) {
   if (document.queryCommandSupported('insertText')) {
     el.focus();
     document.execCommand('insertText', false, value);
+    el.focus();
   }
   // IE support
   else if (document.selection) {
@@ -43,13 +47,16 @@ function insertAtCursor(el, value) {
   }
 }
 
-document.addEventListener('mousedown', e => {
-  const el = e.target;
+function observeKeyChanges() {
+  const el = document.getElementById('version_key');
+  el && el.addEventListener('input', updateChords);
+}
 
-  if(el.classList.contains('js-add-chord')) {
-    const textarea = document.getElementById('version_content');
-    const val = el.innerText.replace(/\s/, '');
-    insertAtCursor(textarea, '[' + val + ']');
-  }
+observeKeyChanges();
+document.addEventListener('turbolinks:load', observeKeyChanges);
 
+addSelectorEventListener('.js-add-chord', 'mouseup', function(e) {
+  const textarea = document.getElementById('version_content');
+  const val = this.innerText.replace(/\s/, '');
+  insertAtCursor(textarea, '[' + val + ']');
 });
