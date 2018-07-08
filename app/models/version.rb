@@ -14,7 +14,7 @@ class Version < ApplicationRecord
 
   before_validation :check_create_author
   before_validation :check_create_song, on: :create
-  before_validation :set_author_name
+  before_validation :set_lyrics
 
   scope :ordered, -> { order(:position) }
   pg_search_scope :search_for,
@@ -41,7 +41,11 @@ class Version < ApplicationRecord
     song.destroy if song.reload.versions.count.zero?
   end
 
-  def set_author_name
-    self.author_name = author&.name
+  def set_lyrics
+    self.lyrics = content.split(/,?\r?\n/).reject{|line|
+      line =~ VersionDecorator::CHORDSIMPLE_REGEX || line =~ VersionDecorator::TITLE_REGEX || line.strip.blank?
+    }.map{|line|
+      line.gsub(VersionDecorator::CHORDPRO_REGEX, '')
+    }.join(", ")
   end
 end
