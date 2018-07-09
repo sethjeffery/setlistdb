@@ -22,6 +22,12 @@ class SongsController < ApplicationController
     end
   end
 
+  def import
+    import = params[:version][:import]
+    @version = Importer.new(import).as_version.decorate
+    render :new
+  end
+
   protected
 
   def version_params

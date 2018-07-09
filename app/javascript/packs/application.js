@@ -17,6 +17,7 @@ import 'basics/datalists';
 import 'basics/form';
 import 'basics/icons';
 import 'basics/avatars';
+import 'components/importer';
 import 'components/song';
 import 'components/version';
 import 'components/header';

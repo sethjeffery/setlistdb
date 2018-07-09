@@ -1,5 +1,6 @@
 class Version < ApplicationRecord
   include PgSearch
+  include Regexes
 
   acts_as_list scope: :song
 
@@ -43,9 +44,9 @@ class Version < ApplicationRecord
 
   def set_lyrics
     self.lyrics = content.split(/,?\r?\n/).reject{|line|
-      line =~ VersionDecorator::CHORDSIMPLE_REGEX || line =~ VersionDecorator::TITLE_REGEX || line.strip.blank?
+      line =~ CHORDSIMPLE_REGEX || line =~ TITLE_REGEX || line.strip.blank?
     }.map{|line|
-      line.gsub(VersionDecorator::CHORDPRO_REGEX, '')
+      line.gsub(CHORDPRO_REGEX, '')
     }.join(", ")
   end
 end

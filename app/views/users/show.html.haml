@@ -15,10 +15,16 @@
         - if @user.versions.present?
           - if @user == current_user && can?(:create, Version)
             .card-header
-              = link_to new_song_path, class: "version" do
-                %i.version-icon.fas.fa-plus-circle.fa-fw
-                .version-title
+              .btn-group
+                = link_to new_song_path, class: "btn btn-primary " do
+                  %i.fas.fa-plus-circle.mr-1
                   Add new song
+                %a.btn.btn-primary.dropdown-toggle{ href: '#', data: { toggle: 'dropdown' } }
+                .dropdown-menu
+                  = form_for :version, url: import_songs_path do |f|
+                    = f.file_field :import
+                    = f.label :import, 'Upload ChordPro, OnSong, Text file...', class: 'dropdown-item'
+
           .card-body
             %ul.versions
               - @user.versions.each do |version|

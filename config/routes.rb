@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   root to: "home#index"
 
   resources :songs do
+    post :import, on: :collection
     resources :versions, path: 'v'
   end
 
