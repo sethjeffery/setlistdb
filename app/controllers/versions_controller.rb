@@ -3,6 +3,18 @@ class VersionsController < ApplicationController
   load_and_authorize_resource :version, through: :song, find_by: :position
   before_action :decorate, except: %i[index]
 
+  def show
+    respond_to do |format|
+      format.chopro {
+        send_data ChordproExporter.new(@version).to_s, filename: "#{@version.song.slug}.chopro"
+      }
+      format.onsong {
+        send_data OnsongExporter.new(@version).to_s, filename: "#{@version.song.slug}.onsong"
+      }
+      format.html
+    end
+  end
+
   def new
     first_version = @version.song.first_version
     @version.title = first_version.title

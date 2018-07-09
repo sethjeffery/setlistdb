@@ -16,4 +16,7 @@ document.addEventListener('turbolinks:load', function(){
   Array.prototype.forEach.call(container.querySelectorAll('[data-spy="scroll"]'), function(element){ new ScrollSpy(element) });
   Array.prototype.forEach.call(container.querySelectorAll('[data-toggle="tab"]'), function(element){ new Tab(element) });
   Array.prototype.forEach.call(container.querySelectorAll('[data-toggle="tooltip"]'), function(element){ new Tooltip(element) });
+  Array.prototype.forEach.call(container.querySelectorAll('[data-tooltip]'), function(element){ new Tooltip(element) });
 },false);
+
+Array.prototype.forEach.call(document.querySelectorAll('[data-tooltip]'), function(element){ new Tooltip(element) });

@@ -13,6 +13,20 @@
                     data: { toggle: 'tooltip' } do
           %i.fas.fa-print
 
+        .dropdown
+          = link_to 'javascript:void(0)',
+                    class: 'btn btn-outline-secondary ml-2',
+                    title: 'Download',
+                    data: { toggle: 'dropdown', tooltip: true } do
+            %i.fas.fa-cloud-download-alt
+          .dropdown-menu.dropdown-menu-right
+            = link_to song_version_path(@song, @version, format: 'chopro'), class: 'dropdown-item' do
+              %i.fab.fa-chordpro.mr-1.fa-fw
+              Download as Chordpro
+            = link_to song_version_path(@song, @version, format: 'onsong'), class: 'dropdown-item' do
+              %i.fab.fa-onsong.mr-1.fa-fw
+              Download as OnSong
+
         - if can? :update, @version
           = link_to edit_song_version_path(@song, @version),
                     class: 'btn btn-primary ml-2',

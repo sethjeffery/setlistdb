@@ -12,7 +12,11 @@ Rails.application.routes.draw do
 
   resources :songs do
     post :import, on: :collection
-    resources :versions, path: 'v'
+    resources :versions, path: 'v' do
+      get :chordpro
+      get :onsong
+      get :pdf
+    end
   end
 
   resources :users

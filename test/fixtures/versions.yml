@@ -1,0 +1,11 @@
+write_a_song:
+  song: write_a_song
+  title: Write A Song
+  author_name: Seth Jeffery
+  user: user
+  key: G
+  position: 1
+  content: |
+    [G]I would like to [A]write a song
+    [C]Telling of all I've [Em]seen and [D]done
+    [G]I would like to [A]write a master[C]piece[D]
