@@ -14,13 +14,14 @@ import { faFileUpload } from '@fortawesome/free-solid-svg-icons/faFileUpload'
 import { faCloudDownloadAlt } from '@fortawesome/free-solid-svg-icons/faCloudDownloadAlt'
 import { faFileAlt } from '@fortawesome/free-solid-svg-icons/faFileAlt'
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons/faUserCircle'
+import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub'
 
 import './icons.scss';
 
 library.add(
   faCheckSquare, faSquare, faPen, faFile, faPlusCircle, faPrint, faSearch,
   faFacebookSquare, faSignOutAlt, faCloudDownloadAlt, faFileUpload, faFileAlt,
-  faUserCircle
+  faUserCircle, faGithub
 );
 
 dom.watch();
