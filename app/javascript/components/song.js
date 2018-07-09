@@ -24,7 +24,7 @@ function addSpacing(el) {
           if (offset < 10) {
             const spacer = document.createElement('span');
             spacer.className = 'spacer';
-            spacer.style.width = lastChord.offsetLeft + lastChord.clientWidth - chord.offsetLeft + 10 + 'px';
+            spacer.style.width = (lastChord.offsetLeft + lastChord.clientWidth - chord.offsetLeft) / 16 + .25 + 'em';
             chord.parentNode.insertBefore(spacer, chord);
           }
         }
