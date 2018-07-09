@@ -10,12 +10,17 @@ import { faPrint } from '@fortawesome/free-solid-svg-icons/faPrint'
 import { faSearch } from '@fortawesome/free-solid-svg-icons/faSearch'
 import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons/faFacebookSquare'
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons/faSignOutAlt'
+import { faFileUpload } from '@fortawesome/free-solid-svg-icons/faFileUpload'
+import { faCloudDownloadAlt } from '@fortawesome/free-solid-svg-icons/faCloudDownloadAlt'
+import { faFileAlt } from '@fortawesome/free-solid-svg-icons/faFileAlt'
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons/faUserCircle'
 
 import './icons.scss';
 
 library.add(
   faCheckSquare, faSquare, faPen, faFile, faPlusCircle, faPrint, faSearch,
-  faFacebookSquare, faSignOutAlt
+  faFacebookSquare, faSignOutAlt, faCloudDownloadAlt, faFileUpload, faFileAlt,
+  faUserCircle
 );
 
 dom.watch();

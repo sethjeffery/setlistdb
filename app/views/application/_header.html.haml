@@ -3,18 +3,40 @@
     .container
       = link_to site_name.gsub(/⋅/, '•'), '/', class: 'navbar-brand'
 
-      %button.navbar-toggler{ type: "button", data: { toggle: "collapse", target: "#navbarSupportedContent" }, aria: { controls: "navbarSupportedContent", expanded: "false", label: "Toggle navigation" }}
-        %span.navbar-toggler-icon
+      %ul.nav.navbar-nav.ml-auto
 
-      .collapse.navbar-collapse#navbarSupportedContent
-        %ul.nav.navbar-nav.ml-auto
-          - if user_signed_in?
-            %li.nav-item
-              = link_to current_user, class: 'nav-link' do
-                = image_tag current_user.image, class: 'avatar'
-                %span.d-none.d-sm-inline.ml-2= current_user.name
-          - else
-            %li.nav-item
-              = link_to user_facebook_omniauth_authorize_path, class: 'nav-link' do
-                %i.fab.fa-facebook-square.mr-1
-                Sign in
+        - if user_signed_in?
+
+          %li.nav-item.dropdown
+            = link_to 'javascript:void(0)', class: 'nav-link', data: { toggle: 'dropdown' } do
+              = image_tag current_user.image, class: 'avatar'
+              %span.d-none.d-sm-inline.ml-2= current_user.name
+
+            .dropdown-menu.dropdown-menu-right
+              = link_to current_user, class: 'dropdown-item' do
+                %i.fas.fa-user-circle.mr-1.fa-fw
+                My profile
+
+              .dropdown-divider
+
+              = link_to new_song_path, class: 'dropdown-item' do
+                %i.fas.fa-file-alt.mr-1.fa-fw
+                New blank song
+
+              = form_for :version, url: import_songs_path do |f|
+                = f.file_field :import
+                = f.label :import, class: 'dropdown-item' do
+                  %i.fas.fa-file-upload.mr-1.fa-fw
+                  Upload ChordPro, OnSong, file...
+
+              .dropdown-divider
+
+              = link_to logout_path, class: 'dropdown-item', method: :delete do
+                %i.fas.fa-sign-out-alt.mr-1.fa-fw
+                Sign out
+
+        - else
+          %li.nav-item
+            = link_to user_facebook_omniauth_authorize_path, class: 'nav-link' do
+              %i.fab.fa-facebook-square.mr-1
+              Sign in

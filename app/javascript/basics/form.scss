@@ -91,6 +91,10 @@ label:not(.col-form-label):not(.custom-control-label):not(.dropdown-item) {
   margin-left: $input-btn-padding-x;
 }
 
+label.dropdown-item {
+  cursor: pointer;
+}
+
 input.form-control {
   border-radius: 0;
   border-top-color: transparent;
