@@ -2,6 +2,7 @@ class SongsController < ApplicationController
   load_and_authorize_resource find_by: :slug, only: %i[show index]
 
   def new
+    authorize! :create, Version
     @version = Version.new.decorate
   end
 
@@ -14,6 +15,7 @@ class SongsController < ApplicationController
   end
 
   def create
+    authorize! :create, Version
     @version = Version.new(version_params.merge(user: current_user)).decorate
     if @version.save
       redirect_to song_version_path(@version.song, @version), flash: { notice: 'Song saved!' }
@@ -23,6 +25,7 @@ class SongsController < ApplicationController
   end
 
   def import
+    authorize! :create, Version
     import = params[:version][:import]
     @version = Importer.new(import).as_version.decorate
     render :new
