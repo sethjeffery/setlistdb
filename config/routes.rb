@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   end
 
   resources :users
+  resources :setlists
 
   get 'search', to: 'search#index'
   get 'terms', to: 'terms#index'

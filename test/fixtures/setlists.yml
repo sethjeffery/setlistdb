@@ -1,0 +1,9 @@
+active:
+  title: Active Setlist
+  date: <%= Date.current %>
+  user: user
+
+past:
+  title: Past Setlist
+  date: <%= Date.yesterday %>
+  user: user
