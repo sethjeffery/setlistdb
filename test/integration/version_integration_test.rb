@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class VersionIntegrationTest < ActionDispatch::IntegrationTest
-  test 'view version' do
+  test 'show version' do
     version = versions(:write_a_song)
     get "/songs/#{version.song.slug}/v/1"
     assert_response :success
@@ -24,4 +24,9 @@ class VersionIntegrationTest < ActionDispatch::IntegrationTest
     assert response.body.present?
   end
 
+  test 'new version requires sign-in' do
+    version = versions(:write_a_song)
+    get "/songs/#{version.song.slug}/v/new"
+    assert_redirected_to user_facebook_omniauth_authorize_path
+  end
 end
