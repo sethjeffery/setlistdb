@@ -3,6 +3,8 @@ import addSelectorEventListener from '../principles/addSelectorEventListener';
 import findClosest from '../principles/findClosest';
 import Glide from '@glidejs/glide';
 import sortable from 'html5sortable/dist/html5sortable.cjs';
+import {post} from "../principles/ajax";
+let glide;
 
 addSelectorEventListener('.js-toggle-songs', 'click', function(e) {
   const setlist = findClosest(this, '.setlist');
@@ -37,29 +39,38 @@ function createGlide({ startAt = 0 } = {}) {
     });
 }
 
+function onSortUpdate() {
+  glide.destroy();
+  const versions = Array.prototype.slice.call(document.getElementById('setlist-versions').childNodes).filter(v => v.tagName === 'LI');
+  const slides = document.getElementById('setlist-slides').childNodes;
+  let activeIndex = 0;
+  let orderedIds = [];
+
+  versions.forEach((version, index) => {
+    orderedIds.push(version.dataset.id);
+    const slide = Array.prototype.slice.call(slides).find(s => s.dataset && s.dataset.id === version.dataset.id);
+    slide.parentNode.appendChild(slide);
+    if(version.getElementsByTagName('a')[0].classList.contains('active')) {
+      activeIndex = index;
+    }
+  });
+
+  post(reorderSetlistPath(), { setlist_versions: orderedIds.join(',') });
+  glide = createGlide({ startAt: activeIndex });
+}
+
 function setupSetlists() {
-  let glide = createGlide();
+  if(document.querySelector('.glide')) {
+    glide = createGlide();
+  }
 
-  const sortables = sortable('#setlist-versions', {
+  const sortableVersions = sortable('#setlist-versions', {
     forcePlaceholderSize: true
-  });
+  })[0];
 
-  sortables[0].addEventListener('sortupdate', function(e) {
-    glide.destroy();
-    const versions = Array.prototype.slice.call(document.getElementById('setlist-versions').childNodes).filter(v => v.tagName === 'LI');
-    const slides = document.getElementById('setlist-slides').childNodes;
-    let activeIndex = 0;
-    versions.forEach((version, index) => {
-      if(version.dataset && version.dataset.id) {
-        const slide = Array.prototype.slice.call(slides).find(s => s.dataset && s.dataset.id === version.dataset.id);
-        slide.parentNode.appendChild(slide);
-        if(version.getElementsByTagName('a')[0].classList.contains('active')) {
-          activeIndex = index;
-        }
-      }
-    });
-    glide = createGlide({ startAt: activeIndex });
-  });
+  if(sortableVersions) {
+    sortableVersions.addEventListener('sortupdate', onSortUpdate);
+  }
 
   document.querySelectorAll('.setlist .card-list-item__link').forEach(item => {
     item.addEventListener('click', function(e) {
@@ -70,6 +81,14 @@ function setupSetlists() {
     });
   });
 
+}
+
+function currentSetlistId() {
+  return location.pathname.match(/\/setlists\/(\w+)/)[1];
+}
+
+function reorderSetlistPath(id = currentSetlistId()) {
+  return `/setlists/${id}/reorder`;
 }
 
 document.addEventListener('turbolinks:load', setupSetlists);

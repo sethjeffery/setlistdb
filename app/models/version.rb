@@ -3,6 +3,7 @@ class Version < ApplicationRecord
   include Regexes
 
   acts_as_list scope: :song
+  scope :ordered, -> { order(:position) }
 
   belongs_to :song
   belongs_to :user
@@ -17,8 +18,6 @@ class Version < ApplicationRecord
   before_validation :check_create_author
   before_validation :check_create_song, on: :create
   before_validation :set_lyrics
-
-  scope :ordered, -> { order(:position) }
 
   scope :find_by_slug_and_position, ->(slug, position) {
     joins(:song).where(songs: { slug: slug }).find_by(position: position)

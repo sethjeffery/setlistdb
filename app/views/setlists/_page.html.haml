@@ -1,9 +1,9 @@
 .glide
   .glide__track{ data: { glide_el: "track" } }
     %ul.glide__slides#setlist-slides
-      - @setlist.setlist_versions.includes(:version).each do |setlist_version|
+      - @setlist.setlist_versions.ordered.includes(:version).each do |setlist_version|
         - version = setlist_version.version.decorate
-        %li.glide__slide{ data: { id: setlist_version.id }}
+        %li.glide__slide{ data: { id: setlist_version.to_param }}
           .container
             %article.song-page.mx-auto
               %h1.song-title

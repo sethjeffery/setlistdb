@@ -40,6 +40,13 @@ class SetlistsController < ApplicationController
     redirect_to @setlist
   end
 
+  def reorder
+    @setlist = Setlist.find(params[:id])
+    authorize! :update, @setlist
+    @setlist.reorder(params[:setlist_versions].split(','))
+    head 200
+  end
+
   private
 
   def setlist_params

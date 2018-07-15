@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   resources :setlists do
     member do
       get 'add/:song_id/:version_id', action: :add, as: :add
+      post 'reorder', as: :reorder
     end
   end
 

@@ -9,3 +9,15 @@ write_a_song:
     [G]I would like to [A]write a song
     [C]Telling of all I've [Em]seen and [D]done
     [G]I would like to [A]write a master[C]piece[D]
+
+write_a_song_v2:
+  song: write_a_song
+  title: Write A Song V2
+  author_name: Seth Jeffery
+  user: user
+  key: A
+  position: 1
+  content: |
+    [A]I would like to [B]write another song
+    [D]Telling of all I've [F#m]seen and [E]done
+    [A]I would like to [B]write a master[D]piece[E]

@@ -35,4 +35,10 @@ class Setlist < ApplicationRecord
       setlist_versions.create(version_id: version_id)
     end
   end
+
+  def reorder(*hashids)
+    hashids.flatten.each_with_index do |hashid, index|
+      setlist_versions.detect{|sv| sv.hashid == hashid }&.update_column('position', index + 1)
+    end
+  end
 end
