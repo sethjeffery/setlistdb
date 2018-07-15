@@ -20,7 +20,12 @@ Rails.application.routes.draw do
   end
 
   resources :users
-  resources :setlists
+
+  resources :setlists do
+    member do
+      post 'add/:song_id/:version_id', action: :add, as: :add
+    end
+  end
 
   get 'search', to: 'search#index'
   get 'terms', to: 'terms#index'

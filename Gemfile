@@ -33,6 +33,7 @@ gem 'omniauth-facebook'
 # SEO
 gem 'meta-tags'
 gem 'friendly_id'
+gem 'hashid-rails'
 
 # Configuration
 gem 'envyable'

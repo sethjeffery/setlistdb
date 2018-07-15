@@ -1,0 +1,12 @@
+.setlist.setlist--show-songs.mt-negative
+  = render '/setlists/header'
+
+  .container
+    .no-print.mb-3#setlist-songs
+      .card-title
+        Songs
+      .card
+        .card-body
+          = render '/setlists/versions'
+
+  = render '/setlists/page'

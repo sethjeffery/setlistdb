@@ -1,0 +1,15 @@
+.glide
+  .glide__track{ data: { glide_el: "track" } }
+    %ul.glide__slides
+      - @setlist.versions.decorate.each do |version|
+        %li.glide__slide
+          .container
+            %article.song-page.mx-auto
+              %h1.song-title
+                = version.title
+
+              %h2.song-subtitle
+                = version.author
+
+              .song-content
+                = version.to_html

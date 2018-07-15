@@ -20,4 +20,12 @@ class SetlistTest < ActiveSupport::TestCase
   test 'has versions' do
     assert_includes setlists(:active).versions, versions(:write_a_song)
   end
+
+  test 'can have first version' do
+    setlist = Setlist.create!(date: Date.current,
+                              user: users(:user),
+                              song: songs(:write_a_song).to_param,
+                              version: versions(:write_a_song).to_param)
+    assert_includes setlist.versions, versions(:write_a_song)
+  end
 end

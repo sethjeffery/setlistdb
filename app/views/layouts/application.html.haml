@@ -27,10 +27,10 @@
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', async: true, defer: true
 
   %body
-    = render 'header'
+    = render '/application/header'
     #main
       = yield
-    = render 'footer'
+    = render '/application/footer'
 
     = stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Lobster|News+Cycle:400,700', media: :all
     = render 'gtag' if Rails.env.production?

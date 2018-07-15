@@ -124,7 +124,7 @@ function observeContentChanges() {
     key.addEventListener('input', observeChange, { passive: true });
   }
 
-  addSpacing(document.querySelector('.song-content'));
+  document.querySelectorAll('.song-content').forEach(addSpacing);
 }
 
 observeContentChanges();

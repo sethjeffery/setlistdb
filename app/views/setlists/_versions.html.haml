@@ -1,0 +1,15 @@
+%ul.card-list
+  - @setlist.setlist_versions.includes(:version).each_with_index do |setlist_version, index|
+    - version = setlist_version.version
+    %li.card-list-item.setlist-version<>
+      = link_to setlist_path(@setlist), class: "card-list-item__link #{'active' if index == 0}" do
+        - if version.lang
+          %i.card-list-item__icon{class: "flag-#{version.lang}"}
+
+        %div
+          %span.card-list-item__title= version.title
+          - if version.key.present?
+            in #{version.key}
+
+        - if version.author
+          .card-list-item__subtitle= version.author

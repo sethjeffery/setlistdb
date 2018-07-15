@@ -1,0 +1,9 @@
+.container
+  - if can? :create, Setlist
+    .mb-3
+      = link_to 'New setlist', new_setlist_path, class: 'btn btn-primary'
+
+  %ul
+    - @setlists.each do |setlist|
+      %li
+        = link_to setlist, setlist

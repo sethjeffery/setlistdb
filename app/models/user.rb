@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :trackable, :omniauthable, omniauth_providers: %i[facebook]
 
   has_many :versions, dependent: :destroy
+  has_many :setlists, dependent: :destroy
   attr_accessor :password
 
   extend FriendlyId

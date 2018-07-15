@@ -8,7 +8,7 @@
 
       .ml-auto.d-flex
         = link_to 'javascript:window.print()',
-                    class: 'float-right btn btn-outline-secondary ml-2',
+                    class: 'btn btn-outline-secondary ml-2',
                     title: 'Print',
                     data: { toggle: 'tooltip' } do
           %i.fas.fa-print
@@ -19,10 +19,13 @@
                     title: 'Download',
                     data: { toggle: 'dropdown', tooltip: true } do
             %i.fas.fa-cloud-download-alt
+
           .dropdown-menu.dropdown-menu-right
+
             = link_to song_version_path(@song, @version, format: 'chopro'), class: 'dropdown-item' do
               %i.fab.fa-chordpro.mr-1.fa-fw
               Download as Chordpro
+
             = link_to song_version_path(@song, @version, format: 'onsong'), class: 'dropdown-item' do
               %i.fab.fa-onsong.mr-1.fa-fw
               Download as OnSong
@@ -38,24 +41,22 @@
     .row
       .col.order-md-1
         %article.song-page.ml-auto
-
-          %h1.song-title
-            = title @version.title
-
-          %h2.song-subtitle
-            = @version.author
-
-          .text-hide
-            Lyrics and chords for #{@version.title}.
-
-          .song-content
-            = @version.to_html
+          = render '/versions/page'
 
       .col-md-5.no-print.order-md-0
-        .card.mb-3
+        .card
           .card-body
             = render '/versions/description'
 
-        .card.mb-3
+        - if user_signed_in?
+          .card-title
+            Setlists
+          .card
+            .card-body
+              = render '/versions/setlists'
+
+        .card-title
+          Versions
+        .card
           .card-body
             = render '/versions/versions'

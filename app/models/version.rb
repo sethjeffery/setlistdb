@@ -12,12 +12,18 @@ class Version < ApplicationRecord
   enum version_type: %i[original translation interpretation alternative]
 
   validates_presence_of :title, :content
+  validates_format_of :key, with: /\A[A-G][b#]?m?\z/
 
   before_validation :check_create_author
   before_validation :check_create_song, on: :create
   before_validation :set_lyrics
 
   scope :ordered, -> { order(:position) }
+
+  scope :find_by_slug_and_position, ->(slug, position) {
+    joins(:song).where(songs: { slug: slug }).find_by(position: position)
+  }
+
   pg_search_scope :search_for,
                   against: %i(title author_name lyrics),
                   ignoring: :accents

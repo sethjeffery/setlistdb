@@ -44,6 +44,10 @@
   dependencies:
     "@fortawesome/fontawesome-common-types" "^0.2.0"
 
+"@glidejs/glide@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@glidejs/glide/-/glide-3.1.0.tgz#6b69df4e5a79acda76af863877c8d776ba79fa66"
+
 "@rails/webpacker@3.5":
   version "3.5.3"
   resolved "https://registry.yarnpkg.com/@rails/webpacker/-/webpacker-3.5.3.tgz#8be7f4bfb1ce6f00c3456cbbe3dc363ca72bafc8"

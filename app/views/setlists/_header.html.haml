@@ -1,0 +1,21 @@
+.navbar.no-print.bg-light.px-0
+  .container.flex-nowrap
+    .setlist-actions
+      .btn-group
+        = link_to 'javascript:void(0)',
+                      class: 'btn btn-info js-toggle-songs mr-2',
+                      title: 'Show songs',
+                      data: { toggle: 'tooltip' } do
+          %i.fas.fa-list
+
+    .setlist-title
+      = title @setlist.to_s
+
+    .setlist-actions
+      .ml-auto
+      - if can? :update, @setlist
+        = link_to edit_setlist_path(@setlist),
+                    class: 'btn btn-outline-primary ml-2',
+                    title: 'Edit',
+                    data: { toggle: 'tooltip' } do
+          %i.fas.fa-pen

@@ -9,10 +9,13 @@
   .row
     .col-xl-6
       .form-group
-        = f.label :title, autofocus: @version.new_record?
+        = f.label :title
         = f.text_field :title,
+                       autofocus: @version.new_record?,
                        class: 'form-control',
                        maxlength: 50
+    .invalid-feedback
+      Please provide the song's name
 
     .col-xl-6
       .form-group
@@ -20,6 +23,8 @@
         = f.text_field :author_name,
                        class: 'form-control',
                        maxlength: 50
+    .invalid-feedback
+      Please provide the author
 
   .row
     .col-md-6
@@ -28,8 +33,10 @@
         = f.text_field :key,
                        class: 'form-control',
                        maxlength: 3,
-                       pattern: "[A|B|C|D|E|F|G](b|#)?m?",
-                       title: 'G, Bb, Em, etc..'
+                       pattern: "[A-G][b#]?m?",
+                       title: 'G, Bb, F#m, etc..'
+    .invalid-feedback
+      The song key must be a valid format (e.g. G, Bb, F#m ...)
 
     .col-md-6
       .form-group

@@ -1,0 +1,11 @@
+%h1.song-title
+  = title @version.title
+
+  %h2.song-subtitle
+    = @version.author
+
+  .text-hide
+    Lyrics and chords for #{@version.title}.
+
+  .song-content
+    = @version.to_html

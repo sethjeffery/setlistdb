@@ -1,4 +1,9 @@
 class Setlist < ApplicationRecord
+  include Hashid::Rails
+
+  # auto-add song to new setlist
+  attr_accessor :song, :version
+
   belongs_to :user
   has_many :setlist_versions
   has_many :versions, through: :setlist_versions
@@ -8,6 +13,7 @@ class Setlist < ApplicationRecord
   scope :for, -> user { where(user_id: user.id) }
 
   validates_presence_of :date
+  before_create :add_first_version
 
   def active?
     date >= Date.current
@@ -15,5 +21,18 @@ class Setlist < ApplicationRecord
 
   def past?
     date < Date.current
+  end
+
+  def add_first_version
+    add(song, version) if song.present? && version.present?
+  end
+
+  def add(slug, version)
+    version_id = Version.find_by_slug_and_position(slug, version).id
+    if new_record?
+      setlist_versions.build(version_id: version_id)
+    else
+      setlist_versions.create(version_id: version_id)
+    end
   end
 end

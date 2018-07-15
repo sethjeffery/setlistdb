@@ -1,1 +1,9 @@
 @import '../principles/variables';
+
+.navbar .dropdown-menu {
+  position: absolute;
+  margin-top: 7px;
+  right: -1px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}

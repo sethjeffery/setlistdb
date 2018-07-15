@@ -1,0 +1,94 @@
+@import '../principles/variables';
+@import '../principles/mixins';
+
+.card {
+  margin-bottom: 1.5rem;
+}
+
+.card-body {
+  padding: 1rem;
+
+  @include media-breakpoint-up(lg) {
+    padding: $card-spacer-x;
+  }
+}
+
+.card-title {
+  margin: $card-spacer-y 1rem #{$card-spacer-y / 4};
+  font-size: .75rem;
+  text-transform: uppercase;
+  opacity: 0.75;
+
+  @include media-breakpoint-up(lg) {
+    margin: $card-spacer-y $card-spacer-x #{$card-spacer-y / 4};
+  }
+}
+
+.card-list {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: -.5rem;
+  margin-top: -.5rem;
+}
+
+.card-list-item {
+  margin-bottom: .5rem;
+  margin-top: .5rem;
+  position: relative;
+
+  .fa-fw {
+    left: .125rem;
+    top: .25rem;
+  }
+
+  @include media-breakpoint-up(lg) {
+    padding-left: 2rem;
+  }
+}
+
+.card-list-item__link {
+  display: block;
+  color: $body-color;
+
+  .card-list-item__title, .fa-fw {
+    color: $link-color;
+  }
+
+  &:hover {
+    text-decoration: none;
+    color: $body-color;
+
+    .card-list-item__title, .fa-fw {
+      text-decoration: underline;
+      color: $link-hover-color;
+    }
+  }
+
+  &.active {
+    .card-list-item__title {
+      font-weight: bold;
+      color: $body-color;
+    }
+  }
+}
+
+.card-list-item__icon {
+  position: absolute;
+  left: 0;
+  display: none;
+
+  @include media-breakpoint-up(lg) {
+    display: block;
+  }
+
+}
+
+.card-list-item__subtitle {
+  font-size: .75rem;
+  text-transform: uppercase;
+  color: $gray-600;
+}
+
+.card-body + .card-body {
+  border-top: solid 1px $gray-100;
+}

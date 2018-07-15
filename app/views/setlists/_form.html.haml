@@ -1,0 +1,28 @@
+= form_for @setlist do |f|
+  = f.hidden_field :song
+  = f.hidden_field :version
+
+  .form-group
+    = f.label :date
+    = f.date_field :date,
+                   class: 'form-control',
+                   maxlength: 50,
+                   min: Date.today,
+                   autofocus: @setlist.new_record?
+    .invalid-feedback
+      Please specify the date for this setlist
+
+  .form-group
+    = f.label :title
+    = f.text_field :title,
+                   class: 'form-control',
+                   maxlength: 100,
+                   placeholder: "Optional"
+
+  .form-actions
+    - if @setlist.persisted?
+      = link_to 'Cancel', @setlist, class: 'btn btn-secondary'
+    - else
+      = link_to 'Cancel', setlists_path, class: 'btn btn-secondary'
+
+    = f.submit 'Save changes', class: 'btn btn-primary'

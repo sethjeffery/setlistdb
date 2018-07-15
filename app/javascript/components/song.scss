@@ -1,17 +1,19 @@
 @import '../principles/variables';
+@import '../principles/mixins';
 
 .song-page {
   max-width: 800px;
-  // background-color: $gray-100;
-  // padding: 1.5em;
-  // box-shadow: 0 2px 5px rgba(black, 0.5);
 }
 
 .song-title {
   font-weight: 700;
   text-transform: uppercase;
-  font-size: 2.25em;
+  font-size: 1.75em;
   margin-bottom: 0;
+
+  @include media-breakpoint-up(md) {
+    font-size: 2.25em;
+  }
 }
 
 .song-subtitle {
