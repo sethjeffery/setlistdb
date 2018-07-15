@@ -29,21 +29,25 @@
   padding-left: 0;
   margin-bottom: -.5rem;
   margin-top: -.5rem;
+
+  .sortable-placeholder, .card-list-item {
+    min-height: 1.5em;
+    margin: .25rem -1.25rem;
+    padding: 0 1.25rem 0 3.5rem
+  }
+
+  .sortable-placeholder {
+    background-color: $gray-100;
+  }
+
+  .fa-fw {
+    left: 1.375rem;
+    top: .25rem;
+  }
 }
 
 .card-list-item {
-  margin-bottom: .5rem;
-  margin-top: .5rem;
   position: relative;
-
-  .fa-fw {
-    left: .125rem;
-    top: .25rem;
-  }
-
-  @include media-breakpoint-up(lg) {
-    padding-left: 2rem;
-  }
 }
 
 .card-list-item__link {
@@ -74,19 +78,18 @@
 
 .card-list-item__icon {
   position: absolute;
-  left: 0;
-  display: none;
-
-  @include media-breakpoint-up(lg) {
-    display: block;
-  }
-
+  left: 1.25rem;
 }
 
 .card-list-item__subtitle {
   font-size: .75rem;
   text-transform: uppercase;
   color: $gray-600;
+}
+
+.card-list-item__key {
+  min-width: 4rem;
+  margin-right: .5rem;
 }
 
 .card-body + .card-body {

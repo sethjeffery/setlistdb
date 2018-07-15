@@ -19,6 +19,7 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub'
 import { faListAlt } from '@fortawesome/free-solid-svg-icons/faListAlt'
 import { faListAlt as faListAltRegular } from '@fortawesome/free-regular-svg-icons/faListAlt'
 import { faList } from '@fortawesome/free-solid-svg-icons/faList'
+import { faBars } from '@fortawesome/free-solid-svg-icons/faBars'
 
 import { faOnsong } from './icons/faOnsong';
 import { faChordpro } from './icons/faChordpro';
@@ -29,7 +30,7 @@ library.add(
   faCheckSquare, faSquare, faPen, faFile, faPlusCircle, faPrint, faSearch,
   faFacebookSquare, faSignOutAlt, faCloudDownloadAlt, faFileUpload, faFileAlt,
   faUserCircle, faGithub, faOnsong, faChordpro, faMinusCircle, faListAlt,
-  faListAltRegular, faList
+  faListAltRegular, faList, faBars
 );
 
 dom.watch();

@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 
   resources :setlists do
     member do
-      post 'add/:song_id/:version_id', action: :add, as: :add
+      get 'add/:song_id/:version_id', action: :add, as: :add
     end
   end
 

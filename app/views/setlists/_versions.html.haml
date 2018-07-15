@@ -1,15 +1,14 @@
-%ul.card-list
+%ul.card-list#setlist-versions
   - @setlist.setlist_versions.includes(:version).each_with_index do |setlist_version, index|
-    - version = setlist_version.version
-    %li.card-list-item.setlist-version<>
+    - version = setlist_version.version.decorate
+    %li.card-list-item.setlist-version{ data: { id: setlist_version.id }}
+      .card-list-item__icon.card-list-item__drag
+        %i.fas.fa-bars.fa-fw
       = link_to setlist_path(@setlist), class: "card-list-item__link #{'active' if index == 0}" do
-        - if version.lang
-          %i.card-list-item__icon{class: "flag-#{version.lang}"}
-
-        %div
-          %span.card-list-item__title= version.title
-          - if version.key.present?
-            in #{version.key}
-
-        - if version.author
-          .card-list-item__subtitle= version.author
+        .card-list-item__title= version.title
+        - if version.key.present? || version.author_name.present?
+          .card-list-item__subtitle
+            - if version.key.present?
+              %span.card-list-item__key= version.key
+            - if version.author
+              %span.card-list-item__author= version.author
