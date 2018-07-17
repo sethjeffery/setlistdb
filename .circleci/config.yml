@@ -48,4 +48,4 @@ jobs:
       - run: bundle exec rake
 
       - store_test_results:
-        path: test/reports
+          path: test/reports
