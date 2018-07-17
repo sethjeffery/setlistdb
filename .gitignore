@@ -16,6 +16,8 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+junit.xml
+test/reports
 
 # Ignore uploaded files in development
 /storage/*

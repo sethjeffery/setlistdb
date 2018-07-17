@@ -176,6 +176,8 @@ GEM
     mini_racer (0.1.15)
       libv8 (~> 6.3)
     minitest (5.11.3)
+    minitest-ci (3.4.0)
+      minitest (>= 5.0.6)
     minitest-stub_any_instance (1.0.2)
     msgpack (1.2.4)
     multi_json (1.13.1)
@@ -341,6 +343,7 @@ DEPENDENCIES
   memcachier
   meta-tags
   mini_racer
+  minitest-ci
   minitest-stub_any_instance
   omniauth-facebook
   pg

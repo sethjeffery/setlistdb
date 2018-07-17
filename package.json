@@ -21,6 +21,7 @@
   "devDependencies": {
     "babel-jest": "^23.2.0",
     "jest": "^23.3.0",
+    "jest-junit": "^5.1.0",
     "webpack-dev-server": "2.11.2"
   },
   "jest": {
@@ -30,6 +31,10 @@
     "moduleDirectories": [
       "node_modules",
       "app/javascript"
+    ],
+    "reporters": [
+      "default",
+      "jest-junit"
     ]
   },
   "scripts": {

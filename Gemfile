@@ -88,6 +88,7 @@ group :test do
 
   # testing
   gem 'minitest-stub_any_instance'
+  gem 'minitest-ci'
 end
 
 group :production do
