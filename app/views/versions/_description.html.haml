@@ -1,15 +1,15 @@
 %dl.mb-0
   %dt Title
-  %dd.lead= @version.title
+  %dd= @version.title
 
   - if @version.author
     %dt Author
-    %dd.lead= @version.author
+    %dd= @version.author
 
   - if @version.key.present?
     %dt Key
-    %dd.lead= @version.key
+    %dd= @version.key
 
   %dt Uploaded by
-  %dd.lead
+  %dd
     = link_to @version.user, @version.user

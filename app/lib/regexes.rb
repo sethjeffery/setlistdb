@@ -4,8 +4,8 @@ module Regexes
 
   CHORDPRO_REGEX = /\[(#{CHORD_REGEX})\]/
 
-  CHORDSIMPLE_REGEX = /^\s*(#{CHORD_REGEX})(?:\s+(#{CHORD_REGEX}))*\s*$/m
+  CHORDSIMPLE_REGEX = /^\s*\[?(#{CHORD_REGEX})\]?(?:\s+\[?(#{CHORD_REGEX})\]?)*\s*$/m
 
-  TITLE_REGEX = /^:*(?:\d(st|nd|rd|th)\s)?(?:V|VERSE|CHORUS|PRE|PRE-?CHORUS|BRIDGE|CODA|INTRO|OUTRO|TAG)\s*\d*:*$/i
+  TITLE_REGEX = /^:*(?:\d(st|nd|rd|th)\s)?(?:V|VERSE|CHORUS|PRE|PRE-?CHORUS|BRIDGE|CODA|INTRO|OUTRO|TAG|ENDING|END)\s*\d*:*$/i
 
 end

@@ -6,13 +6,22 @@ $setlist-songs-width: 260px;
 $setlist-songs-width-lg: 320px;
 
 .setlist-title {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  flex: 1 0 auto;
   text-align: center;
   font-size: 1.25rem;
   font-weight: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  a {
+    font-size: .75rem;
+  }
+
+  &, span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 
 .setlist-actions {

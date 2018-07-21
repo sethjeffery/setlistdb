@@ -1,13 +1,20 @@
-.container
-  = form_for :search, method: :get, url: search_path, html: { class: 'form--search' } do |f|
-    .form-group
-      %i.fas.fa-search.form-control-icon
-      = f.search_field :name,
-                       name: 'q',
-                       value: params[:q],
-                       class: 'form-control',
-                       placeholder: 'Search songs by name'
+.navbar.navbar-light.bg-light.px-0
+  .container.d-block
+    = form_for :search, method: :get, url: search_path, html: { class: 'form--search d-flex' } do |f|
+      .form-group.mb-0.flex-grow-1
+        %i.fas.fa-search.form-control-icon
+        = f.search_field :name,
+                         name: 'q',
+                         value: params[:q],
+                         class: 'form-control form-control--transparent',
+                         placeholder: 'Search songs by name'
+      .form-group.mb-0.ml-3
+        = link_to new_song_path("version[title]" => params[:q]), class: 'btn btn-primary' do
+          %i.fas.fa-plus-circle.mr-md-1
+          %span.d-none.d-md-inline
+            New song
 
+.container.margin-content
   %ul.card-list.px-2.my-0
     - @versions.each do |version|
       %li.card-list-item
@@ -15,10 +22,10 @@
           - if version.lang
             %i.card-list-item__icon{class: "flag-#{version.lang}"}
 
-          %div
-            %span.card-list-item__title= version.title
-            - if version.key.present?
-              in #{version.key}
-
-          - if version.author
-            .card-list-item__subtitle= version.author
+          .card-list-item__title= version.title
+          - if version.key.present? || version.author_name.present?
+            .card-list-item__subtitle
+              - if version.key.present?
+                %span.card-list-item__key= version.key
+              - if version.author_name.present?
+                %span.card-list-item__author= version.author_name

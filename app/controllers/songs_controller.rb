@@ -1,9 +1,13 @@
 class SongsController < ApplicationController
   load_and_authorize_resource find_by: :slug, only: %i[show index]
 
+  def index
+    redirect_to root_path
+  end
+
   def new
     authorize! :create, Version
-    @version = Version.new.decorate
+    @version = Version.new(version_params).decorate
   end
 
   def show
@@ -43,7 +47,7 @@ class SongsController < ApplicationController
       :year,
       :lang,
       :version_type
-    )
+    ) if params[:version]
   end
 
 end

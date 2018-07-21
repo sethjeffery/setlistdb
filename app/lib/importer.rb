@@ -8,11 +8,11 @@ class Importer
   def initialize(file)
     @file = file
     if file.is_a?(String)
-      @content = file
+      @content = file.force_encoding("UTF-8")
     elsif file.respond_to?(:read)
-      @content = file.read
+      @content = file.read.force_encoding("UTF-8")
     elsif file.respond_to?(:path)
-      @content = File.read(file.path)
+      @content = File.read(file.path).force_encoding("UTF-8")
     else
       logger.error "Bad file_data: #{file.class.name}: #{file.inspect}"
     end

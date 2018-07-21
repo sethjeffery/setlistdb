@@ -3,8 +3,8 @@ import addSelectorEventListener from '../principles/addSelectorEventListener';
 
 const CHORD_REGEX = /[A-G](?:[b#])?(?:m|M|maj|MAJ|mM)?(?:[0-9]{0,2})(?:[b#+-][0-9])?(?:\/[A-G](?:[b#])?)?/g;
 const CHORDPRO_REGEX = new RegExp(`\\[(${CHORD_REGEX.source})]`, 'g');
-const CHORDSIMPLE_REGEX = new RegExp(`^\\s*(${CHORD_REGEX.source})(?:\\s+(${CHORD_REGEX.source}))*\\s*$`, 'gm');
-const TITLE_REGEX = /^:*(?:\d(st|nd|rd|th)\s)?(?:V|VERSE|CHORUS|PRE|PRE-?CHORUS|BRIDGE|CODA|INTRO|OUTRO|TAG)\s*\d*:*$/i;
+const CHORDSIMPLE_REGEX = new RegExp(`^\\s*\\[?(${CHORD_REGEX.source})\\]?(?:\\s+\\[?(${CHORD_REGEX.source})\\]?)*\\s*$`, 'gm');
+const TITLE_REGEX = /^:*(?:\d(st|nd|rd|th)\s)?(?:V|VERSE|CHORUS|PRE|PRE-?CHORUS|BRIDGE|CODA|INTRO|OUTRO|TAG|ENDING|END)\s*\d*:*$/i;
 
 function tag({ tag = 'div', className = '', content = '' }) {
   return `<${tag} class="${className}">${content}</${tag}>`;
@@ -143,6 +143,18 @@ addSelectorEventListener('.js-toggle-chords', 'click', function(e) {
       this.classList.remove('btn-outline-secondary');
       this.classList.add('btn-info');
       this.innerHTML = `<i class='fas fa-check-square mr-1'></i> ${this.innerText}`;
+      preview.classList.remove('song-page--hide-chords');
+    }
+  }
+});
+
+addSelectorEventListener('.js-toggle-chords', 'change', function(e) {
+  const preview = document.querySelector('.song-page');
+
+  if(this.classList.contains('js-toggle-chords')) {
+    if(this.checked) {
+      preview.classList.add('song-page--hide-chords');
+    } else {
       preview.classList.remove('song-page--hide-chords');
     }
   }

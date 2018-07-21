@@ -14,12 +14,10 @@ dd {
 }
 
 dt {
-  font-size: 1.125rem;
-  font-weight: 700;
+  font-size: .75rem;
   text-transform: uppercase;
-  font-family: $headings-font-family;
-  line-height: 1.25;
-  color: $gray-500;
+  opacity: 0.75;
+  font-weight: 400;
 
   &:not(:first-child) {
     margin-top: 1rem;

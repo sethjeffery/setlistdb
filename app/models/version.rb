@@ -13,7 +13,7 @@ class Version < ApplicationRecord
   enum version_type: %i[original translation interpretation alternative]
 
   validates_presence_of :title, :content
-  validates_format_of :key, with: /\A[A-G][b#]?m?\z/
+  validates_format_of :key, with: /\A[A-G][b#]?m?\z/, allow_blank: true
 
   before_validation :check_create_author
   before_validation :check_create_song, on: :create

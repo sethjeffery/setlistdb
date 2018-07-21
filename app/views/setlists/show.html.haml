@@ -1,12 +1,20 @@
-.setlist.setlist--show-songs.mt-negative
+.setlist.setlist--show-songs
   = render '/setlists/header'
 
-  .container
+  .container.margin-content
     .no-print.mb-3#setlist-songs
       .card-title
         Songs
       .card
         .card-body
           = render '/setlists/versions'
+
+      .card-title
+        Settings
+      .card
+        .card-body
+          .custom-checkbox.custom-control
+            = check_box_tag :chords, '1', true, class: 'custom-control-input js-toggle-chords'
+            %label.custom-control-label{for: 'chords'} Show chords
 
   = render '/setlists/page'

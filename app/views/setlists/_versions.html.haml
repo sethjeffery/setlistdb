@@ -10,5 +10,5 @@
           .card-list-item__subtitle
             - if version.key.present?
               %span.card-list-item__key= version.key
-            - if version.author
-              %span.card-list-item__author= version.author
+            - if version.author_name.present?
+              %span.card-list-item__author= version.author_name
