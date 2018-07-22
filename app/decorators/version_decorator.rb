@@ -49,7 +49,7 @@ class VersionDecorator < ApplicationDecorator
     output = []
 
     lines.each_with_index do |line, index|
-      if CHORDSIMPLE_REGEX.match?(line) && index < lines.length && !CHORDSIMPLE_REGEX.match?(lines[index+1])
+      if index < lines.length - 1 && CHORDSIMPLE_REGEX.match?(line) && index < lines.length && !CHORDSIMPLE_REGEX.match?(lines[index+1])
         offset = 0
         line.scan(CHORD_REGEX) do |match|
           match_index = Regexp.last_match.offset(0)[0]
