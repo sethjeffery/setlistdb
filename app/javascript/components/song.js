@@ -3,7 +3,7 @@ import addSelectorEventListener from '../principles/addSelectorEventListener';
 
 const CHORD_REGEX = /[A-G](?:[b#])?(?:m|M|maj|MAJ|mM)?(?:sus)?(?:[0-9]{0,2})(?:[b#+-][0-9])?(?:\/[A-G](?:[b#])?)?/g;
 const CHORDPRO_REGEX = new RegExp(`\\[(${CHORD_REGEX.source})]`, 'g');
-const CHORDSIMPLE_REGEX = new RegExp(`^\\s*\\[?(${CHORD_REGEX.source})\\]?(?:\\s+\\[?(${CHORD_REGEX.source})\\]?)*\\s*$`, 'gm');
+const CHORDSIMPLE_REGEX = new RegExp(`^\\s*\\[?(${CHORD_REGEX.source})\\]?(?:\\s*\\[?(${CHORD_REGEX.source})\\]?)*\\s*$`, 'gm');
 const TITLE_REGEX = /^:*(?:\d(st|nd|rd|th)\s)?(?:V|VERSE|CHORUS|PRE|PRE-?CHORUS|BRIDGE|CODA|INTRO|OUTRO|TAG|ENDING|END)\s*\d*:*$/i;
 
 function tag({ tag = 'div', className = '', content = '' }) {
