@@ -21,10 +21,10 @@ function addSpacing(el) {
       line.querySelectorAll('.chord').forEach(chord => {
         if (lastChord) {
           const offset = chord.offsetLeft - lastChord.offsetLeft - lastChord.clientWidth;
-          if (offset < 10) {
+          if (offset < 10 && offset >= 0 && chord.offsetTop === lastChord.offsetTop) {
             const spacer = document.createElement('span');
             spacer.className = 'spacer';
-            spacer.style.width = (lastChord.offsetLeft + lastChord.clientWidth - chord.offsetLeft) / 16 + .25 + 'em';
+            spacer.style.width = parseInt(lastChord.offsetLeft + lastChord.clientWidth - chord.offsetLeft) / 16 + .25 + 'em';
             chord.parentNode.insertBefore(spacer, chord);
           }
         }
@@ -57,11 +57,6 @@ function convertToChordPro(lines) {
 function setContentHtml(el, content) {
   let html = '';
 
-  const tempEl = document.createElement('div');
-  tempEl.style.position = 'absolute';
-  tempEl.style.overflow = 'hidden';
-  el.appendChild(tempEl);
-
   const sections = content.split(/\r?\n(?:\r?\n)+/);
 
   sections.filter(s => s).forEach(section => {
@@ -89,11 +84,8 @@ function setContentHtml(el, content) {
     html += tag({ className: `song-section ${hasChords ? 'song-section--chorded' : ''}`, content: sectionHtml })
   });
 
-  tempEl.innerHTML = html;
-  addSpacing(tempEl);
-
-  el.innerHTML = tempEl.innerHTML;
-  tempEl.remove();
+  el.innerHTML = html;
+  addSpacing(el);
 }
 
 function updatePreview({ content, title, author, key }) {
