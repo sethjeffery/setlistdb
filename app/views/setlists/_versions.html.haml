@@ -2,9 +2,9 @@
   - @setlist.setlist_versions.ordered.includes(:version).each_with_index do |setlist_version, index|
     - version = setlist_version.version.decorate
     %li.card-list-item.setlist-version{ data: { id: setlist_version.to_param }}
-      .card-list-item__icon.card-list-item__drag
-        %i.fas.fa-bars.fa-fw
-      = link_to setlist_path(@setlist), class: "card-list-item__link #{'active' if index == 0}" do
+      = link_to setlist_path(@setlist), class: "card-list-link #{'active' if index == 0}" do
+        .card-list-item__icon.card-list-item__drag
+          %i.fas.fa-bars.fa-fw
         .card-list-item__title= version.title
         - if version.key.present? || version.author_name.present?
           .card-list-item__subtitle

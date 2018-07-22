@@ -16,16 +16,21 @@
 
 .container.margin-content
   %ul.card-list.px-2.my-0
+    %li.card-list-header
+      .row
+        .col-9.col-sm-10.col-md-5 Title
+        .col-md-5.d-none.d-md-block Author
+        .col-3.col-sm-2 Key
+
     - @versions.each do |version|
       %li.card-list-item
-        = link_to song_version_path(version.song, version), class: "card-list-item__link #{'active' if version == @version}" do
+        = link_to song_version_path(version.song, version), class: "card-list-link #{'active' if version == @version}" do
           - if version.lang
             %i.card-list-item__icon{class: "flag-#{version.lang}"}
 
-          .card-list-item__title= version.title
-          - if version.key.present? || version.author_name.present?
-            .card-list-item__subtitle
-              - if version.key.present?
-                %span.card-list-item__key= version.key
-              - if version.author_name.present?
-                %span.card-list-item__author= version.author_name
+          .row
+            .col-9.col-sm-10.col-md-5
+              .card-list-item__title= version.title
+              .card-list-item__subtitle.d-md-none= version.author_name
+            .col-md-5.d-none.d-md-block.card-list-item__author= version.author_name
+            .col-3.col-sm-2.card-list-item__key= version.key

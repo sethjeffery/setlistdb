@@ -30,31 +30,33 @@
   margin-bottom: -.5rem;
   margin-top: -.5rem;
 
-  .sortable-placeholder, .card-list-item {
-    min-height: 1.5em;
-    margin: .25rem -1.25rem;
-    padding: 0 1.25rem 0 3.5rem
-  }
-
   .sortable-placeholder {
     background-color: $gray-100;
   }
 
   .fa-fw {
-    left: 1.375rem;
-    top: .25rem;
+    left: .125rem;
+    top: .75rem;
   }
 }
 
-.card-list-item {
-  position: relative;
+.card-list-item + .card-list-item {
+  border-top: solid 1px $gray-100;
 }
 
-.card-list-item__link {
+.card-list .sortable-placeholder,
+.card-list-link,
+.card-list-header {
+  position: relative;
+  min-height: 1.5em;
+  padding: .5rem 0 .5rem 2.25rem;
   display: block;
   color: $body-color;
+}
 
-  .card-list-item__title, .fa-fw {
+.card-list-link {
+  .card-list-item__title,
+  .fa-fw {
     color: $link-color;
   }
 
@@ -62,7 +64,8 @@
     text-decoration: none;
     color: $body-color;
 
-    .card-list-item__title, .fa-fw {
+    .card-list-item__title,
+    .fa-fw {
       text-decoration: underline;
       color: $link-hover-color;
     }
@@ -74,24 +77,33 @@
       color: $body-color;
     }
   }
+
+  .card-list-item__drag .fa-fw {
+    color: $body-color;
+  }
+
 }
 
 .card-list-item__icon {
   position: absolute;
-  left: 1.25rem;
+  left: 0;
 }
 
-.card-list-item__subtitle {
+.card-list-header {
   font-size: .75rem;
   text-transform: uppercase;
   color: $gray-600;
 }
 
-.card-list-item__key {
-  min-width: 4rem;
-  margin-right: .5rem;
-}
-
 .card-body + .card-body {
   border-top: solid 1px $gray-100;
+}
+
+.card-list-item__subtitle {
+  font-size: .75rem;
+  color: $gray-600;
+}
+
+.card-list-item__drag {
+  cursor: ns-resize;
 }

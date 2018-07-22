@@ -2,7 +2,7 @@
   - current_user.setlists.active.includes(:versions).decorate.each do |setlist|
     %li.card-list-item
       - if setlist.versions.include?(@version)
-        = link_to setlist_path(setlist), class: "card-list-item__link active" do
+        = link_to setlist_path(setlist), class: "card-list-link active" do
           %i.card-list-item__icon.far.fa-list-alt.fa-fw
           .card-list-item__title.active
             = setlist
@@ -10,18 +10,18 @@
             In this setlist
       - else
         - if can? :update, setlist
-          = link_to add_setlist_path(setlist, @song, @version), class: "card-list-item__link", method: :post do
+          = link_to add_setlist_path(setlist, @song, @version), class: "card-list-link", method: :post do
             %i.card-list-item__icon.far.fa-list-alt.fa-fw
             Add to
             %span.card-list-item__title= setlist
         - else
-          = link_to setlist(setlist), class: "card-list-item__link" do
+          = link_to setlist(setlist), class: "card-list-link" do
             %i.card-list-item__icon.far.fa-list-alt.fa-fw
             .card-list-item__title= setlist
 
   - if can? :create, Setlist
     %li.card-list-item
-      = link_to new_setlist_path(s: @song, v: @version), class: "card-list-item__link" do
+      = link_to new_setlist_path(s: @song, v: @version), class: "card-list-link" do
         %i.card-list-item__icon.fas.fa-plus-circle.fa-fw
         Add to
         %span.card-list-item__title new setlist
