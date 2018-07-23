@@ -140,3 +140,10 @@ textarea.form-control {
 .form-control-icon  ~ .form-control-lg, .form-control-with-icon.form-control-lg {
   padding-left: 3rem;
 }
+
+.custom-control-label::before,
+.custom-control-label::after {
+  top: 0.25em;
+  width: 1em;
+  height: 1em;
+}

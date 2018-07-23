@@ -141,13 +141,16 @@ addSelectorEventListener('.js-toggle-chords', 'click', function(e) {
 });
 
 addSelectorEventListener('.js-toggle-chords', 'change', function(e) {
-  const preview = document.querySelector('.song-page');
 
   if(this.classList.contains('js-toggle-chords')) {
     if(this.checked) {
-      preview.classList.add('song-page--hide-chords');
+      document.querySelectorAll('.song-page').forEach(function(preview) {
+        preview.classList.remove('song-page--hide-chords');
+      });
     } else {
-      preview.classList.remove('song-page--hide-chords');
+      document.querySelectorAll('.song-page').forEach(function(preview) {
+        preview.classList.add('song-page--hide-chords');
+      });
     }
   }
 });

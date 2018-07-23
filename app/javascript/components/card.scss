@@ -53,6 +53,10 @@
   }
 }
 
+.card-list-item {
+  position: relative;
+}
+
 .card-list-item + .card-list-item {
   border-top: solid 1px $gray-100;
 }
@@ -101,6 +105,7 @@
   position: absolute;
   margin-top: .25rem;
   left: 0;
+  top: .5em;
 }
 
 .card-list-header {

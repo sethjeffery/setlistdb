@@ -7,9 +7,7 @@
         .card-body.py-sm-2
           = render '/setlists/versions'
 
-      .card-title
-        Settings
-      .card
+      .card.card-xs-borderless
         .card-body
           .custom-checkbox.custom-control
             = check_box_tag :chords, '1', true, class: 'custom-control-input js-toggle-chords'
