@@ -4,6 +4,6 @@ module ApplicationHelper
   end
 
   def site_name
-    'Setlist⋅db'
+    'Setlistdb'
   end
 end

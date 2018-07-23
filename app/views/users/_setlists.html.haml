@@ -1,0 +1,30 @@
+.card
+  - if @user.setlists.present?
+    - if @user == current_user && can?(:create, Setlist)
+      .card-header
+        .btn-group
+          = link_to new_setlist_path, class: "btn btn-primary" do
+            %i.fas.fa-plus-circle.mr-1
+            Add new setlist
+
+    .card-body.py-2
+      %ul.card-list
+        - @user.setlists.newest_first.decorate.each do |setlist|
+          %li.card-list-item
+            = link_to setlist, class: "card-list-link" do
+              %i.card-list-item__icon.far.fa-list-alt.fa-fw
+              .card-list-item__title= setlist
+
+              - if setlist.title.present?
+                .card-list-item__subtitle= setlist.date.strftime('%d %B %Y')
+
+  - elsif @user == current_user
+    .card-body
+      %p You have not created any setlists yet.
+      = link_to new_setlist_path, class: 'btn btn-primary' do
+        %i.fas.fa-plus-circle.mr-1
+        Add your first setlist
+
+  - else
+    .card-body
+      #{@user} has not added any setlists yet.

@@ -65,6 +65,7 @@ function setupSetlists() {
   }
 
   const sortableVersions = sortable('#setlist-versions', {
+    items: '.card-list-item',
     forcePlaceholderSize: true
   })[0];
 
@@ -72,7 +73,7 @@ function setupSetlists() {
     sortableVersions.addEventListener('sortupdate', onSortUpdate);
   }
 
-  document.querySelectorAll('.setlist .card-list-item__link').forEach(item => {
+  document.querySelectorAll('.setlist .card-list-link').forEach(item => {
     item.addEventListener('click', function(e) {
       e.preventDefault();
       const parent = item.parentNode.parentNode;

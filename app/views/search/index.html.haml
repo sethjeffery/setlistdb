@@ -26,7 +26,7 @@
       %li.card-list-item
         = link_to song_version_path(version.song, version), class: "card-list-link #{'active' if version == @version}" do
           - if version.lang
-            %i.card-list-item__icon{class: "flag-#{version.lang}"}
+            %i.card-list-item__icon.fa-fw{class: "flag-#{version.lang}"}
 
           .row
             .col-9.col-sm-10.col-md-5

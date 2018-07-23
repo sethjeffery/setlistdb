@@ -4,6 +4,9 @@ class Version < ApplicationRecord
 
   acts_as_list scope: :song
   scope :ordered, -> { order(:position) }
+  scope :newest_first, -> { order(created_at: :desc) }
+  scope :oldest_first, -> { order(:created_at) }
+  scope :alphabetical, -> { order(:title) }
 
   belongs_to :song
   belongs_to :user

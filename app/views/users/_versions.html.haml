@@ -1,0 +1,40 @@
+.card
+  - if @user.versions.present?
+    - if @user == current_user && can?(:create, Version)
+      .card-header
+        .btn-group
+          = link_to 'javascript:void(0)', class: "btn btn-primary dropdown-toggle", data: { toggle: 'dropdown' } do
+            %i.fas.fa-plus-circle.mr-1
+            Add new song
+          .dropdown-menu
+            = link_to new_song_path, class: 'dropdown-item' do
+              %i.fas.fa-file-alt.mr-1.fa-fw
+              New blank song
+            %label.dropdown-item{ for: 'version_import' }
+              %i.fas.fa-file-upload.mr-1.fa-fw
+              Upload ChordPro, OnSong, file...
+
+    .card-body.py-2
+      %ul.card-list
+        - @user.versions.alphabetical.oldest_first.each do |version|
+          %li.card-list-item
+            = link_to song_version_path(version.song, version), class: "card-list-link" do
+              - if version.lang
+                %i.card-list-item__icon.fa-fw{class: "flag-#{version.lang}"}
+
+              .card-list-item__title= version.title
+
+              - if version.author
+                .card-list-item__subtitle= version.author
+
+  - elsif @user == current_user
+    .card-body
+      %p You have not added any songs to the database yet.
+      = link_to new_song_path, class: 'btn btn-primary' do
+        %i.fas.fa-plus-circle.mr-1
+        Add your first song
+
+  - else
+    .card-body
+      #{@user} has not added any songs to the
+      database yet.

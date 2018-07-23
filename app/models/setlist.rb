@@ -11,6 +11,7 @@ class Setlist < ApplicationRecord
   scope :active, -> { where('date >= ?', Date.current) }
   scope :past, -> { where('date < ?', Date.current) }
   scope :for, -> user { where(user_id: user.id) }
+  scope :newest_first, -> { order(date: :desc, created_at: :desc) }
 
   validates_presence_of :date
   before_create :add_first_version

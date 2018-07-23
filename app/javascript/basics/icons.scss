@@ -8,15 +8,16 @@ $flags: 'au', 'gb', 'br', 'co', 'es', 'fr', 'gb', 'mx', 'pt', 'us';
 
 [class*='flag-'] {
   display: inline-block;
-  width: 1.5em;
-  height: 1.5em;
+  width: 1.25em;
+  height: 1em;
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 
   .choices__item & {
     vertical-align: top;
-    margin-right: 2px;
+    margin-right: 4px;
+    margin-top: 3px;
   }
 }
 

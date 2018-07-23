@@ -3,6 +3,25 @@
 
 .card {
   margin-bottom: 1.5rem;
+  font-size: .875rem;
+
+  @include media-breakpoint-up(md) {
+    font-size: $font-size-base;
+  }
+}
+
+.card-xs-borderless {
+  @include media-breakpoint-down(xs) {
+    margin-left: -15px;
+    margin-right: -15px;
+    border-radius: 0;
+    border: none;
+
+    .card-body {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
 }
 
 .card-body {
@@ -27,16 +46,10 @@
 .card-list {
   list-style: none;
   padding-left: 0;
-  margin-bottom: -.5rem;
-  margin-top: -.5rem;
+  margin-bottom: 0;
 
   .sortable-placeholder {
     background-color: $gray-100;
-  }
-
-  .fa-fw {
-    left: .125rem;
-    top: .75rem;
   }
 }
 
@@ -49,7 +62,7 @@
 .card-list-header {
   position: relative;
   min-height: 1.5em;
-  padding: .5rem 0 .5rem 2.25rem;
+  padding: .5em 0 .5em 2em;
   display: block;
   color: $body-color;
 }
@@ -86,13 +99,17 @@
 
 .card-list-item__icon {
   position: absolute;
+  margin-top: .25rem;
   left: 0;
 }
 
 .card-list-header {
-  font-size: .75rem;
-  text-transform: uppercase;
-  color: $gray-600;
+  padding-bottom: 0;
+  > div {
+    font-size: .75rem;
+    text-transform: uppercase;
+    color: $gray-600;
+  }
 }
 
 .card-body + .card-body {
@@ -106,4 +123,13 @@
 
 .card-list-item__drag {
   cursor: ns-resize;
+  width: 2rem;
+  z-index: 1;
+}
+
+.col-key {
+  flex: 0 0 70px;
+  max-width: 70px;
+  padding-left: $grid-gutter-width / 2;
+  padding-right: $grid-gutter-width / 2;
 }
