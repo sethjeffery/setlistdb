@@ -91,6 +91,12 @@
                     = chord
       = f.text_area :content, class: 'form-control has-toolbar', rows: 16
 
+  .form-group
+    = f.label :notes
+    = f.text_area :notes,
+                  class: 'form-control',
+                  rows: 3
+
   - if @version.errors.present?
     .form-group
       .alert.alert-danger

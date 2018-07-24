@@ -54,8 +54,12 @@ function convertToChordPro(lines) {
   return output;
 }
 
-function setContentHtml(el, content) {
+function setContentHtml(el, { content, key, notes }) {
   let html = '';
+
+  if(notes) {
+    html += tag({ className: 'song-notes', content: notes });
+  }
 
   const sections = content.split(/\r?\n(?:\r?\n)+/);
 
@@ -76,7 +80,7 @@ function setContentHtml(el, content) {
       lines = lines.slice(1, lines.length)
     }
 
-    convertToChordPro(lines).forEach(line => {
+    convertToChordPro(lines).filter(s => s).forEach(line => {
       const sanitized = escapeHtml(line).replace(CHORDPRO_REGEX, '<span class="chord">$1</span>');
       sectionHtml += tag({ content: sanitized, className: 'song-line' });
     });
@@ -88,24 +92,25 @@ function setContentHtml(el, content) {
   addSpacing(el);
 }
 
-function updatePreview({ content, title, author, key }) {
+function updatePreview({ content, title, author, key, notes }) {
   const contentEl = document.querySelector('.song-page--preview .song-content');
   const titleEl = document.querySelector('.song-page--preview .song-title');
   const subtitleEl = document.querySelector('.song-page--preview .song-subtitle');
 
-  setContentHtml(contentEl, content.value, key.value);
+  setContentHtml(contentEl, { content: content.value, key: key.value, notes: notes.value });
   titleEl.innerHTML = title.value;
   subtitleEl.innerHTML = author.value;
 }
 
 function observeContentChanges() {
   const content = document.getElementById('version_content');
+  const notes = document.getElementById('version_notes');
   const title = document.getElementById('version_title');
-  const author = document.getElementById('version_author_name');
+  const author = document.getElementById('version_artist_names');
   const key = document.getElementById('version_key');
 
   const observeChange = function() {
-    updatePreview({ content, title, author, key });
+    updatePreview({ content, title, author, key, notes });
   };
 
   if(content) {
@@ -114,6 +119,7 @@ function observeContentChanges() {
     title.addEventListener('input', observeChange, { passive: true });
     author.addEventListener('input', observeChange, { passive: true });
     key.addEventListener('input', observeChange, { passive: true });
+    notes.addEventListener('input', observeChange, { passive: true });
   }
 
   document.querySelectorAll('.song-content').forEach(addSpacing);
@@ -126,16 +132,14 @@ addSelectorEventListener('.js-toggle-chords', 'click', function(e) {
   const preview = document.querySelector('.song-page');
 
   if(this.classList.contains('js-toggle-chords')) {
-    if(this.classList.contains('btn-info')) {
-      this.classList.remove('btn-info');
-      this.classList.add('btn-outline-secondary');
-      this.innerHTML = `<i class='far fa-square mr-1'></i> ${this.innerText}`;
-      preview.classList.add('song-page--hide-chords');
-    } else {
-      this.classList.remove('btn-outline-secondary');
-      this.classList.add('btn-info');
+    if(this.classList.contains('text-muted')) {
+      this.classList.remove('text-muted');
       this.innerHTML = `<i class='fas fa-check-square mr-1'></i> ${this.innerText}`;
       preview.classList.remove('song-page--hide-chords');
+    } else {
+      this.classList.add('text-muted');
+      this.innerHTML = `<i class='far fa-square mr-1'></i> ${this.innerText}`;
+      preview.classList.add('song-page--hide-chords');
     }
   }
 });

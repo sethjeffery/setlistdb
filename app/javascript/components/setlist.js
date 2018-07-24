@@ -10,14 +10,12 @@ addSelectorEventListener('.js-toggle-songs', 'click', function(e) {
   const setlist = findClosest(this, '.setlist');
 
   if(this.classList.contains('js-toggle-songs')) {
-    if(this.classList.contains('btn-info')) {
-      this.classList.remove('btn-info');
-      this.classList.add('btn-outline-secondary');
-      setlist.classList.remove('setlist--show-songs');
-    } else {
-      this.classList.remove('btn-outline-secondary');
-      this.classList.add('btn-info');
+    if(this.classList.contains('text-muted')) {
+      this.classList.remove('text-muted');
       setlist.classList.add('setlist--show-songs');
+    } else {
+      this.classList.add('text-muted');
+      setlist.classList.remove('setlist--show-songs');
     }
   }
 });

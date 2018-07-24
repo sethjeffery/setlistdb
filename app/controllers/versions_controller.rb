@@ -53,7 +53,8 @@ class VersionsController < ApplicationController
       :key,
       :year,
       :lang,
-      :version_type
+      :version_type,
+      :notes
     )
   end
 

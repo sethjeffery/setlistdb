@@ -24,7 +24,7 @@
 }
 
 .song-content {
-  margin-top: 1.5em;
+  margin-top: 1em;
   font-size: 1.125em;
 }
 
@@ -42,6 +42,14 @@
   .song-page--hide-chords & {
     margin-bottom: 0;
   }
+}
+
+.song-notes {
+  margin-bottom: 1.5em;
+  font-size: .875em;
+  opacity: .9;
+  background-color: $yellow;
+  padding: 1em;
 }
 
 .song-section {

@@ -1,10 +1,11 @@
 .navbar.no-print.bg-light.px-0
-  .container.flex-nowrap
-    .setlist-actions.dropdown
-      = link_to 'javascript:void(0)',
-                    class: 'btn btn-info js-toggle-songs mr-2' do
-        %i.fas.fa-list
-        %span.d-none.d-md-inline.ml-1 Songs
+  .container.flex-nowrap.navbar-expand.px-2
+    .setlist-actions.navbar-nav
+      .nav-item
+        = link_to 'javascript:void(0)',
+                      class: 'nav-link js-toggle-songs mr-2' do
+          %i.fas.fa-list
+          %span.d-none.d-md-inline.ml-1 Songs
 
     .setlist-title
       %span= title @setlist.to_s
@@ -14,7 +15,7 @@
                   data: { toggle: 'tooltip' } do
           %i.fas.fa-pen
 
-    .setlist-actions
+    .setlist-actions.navbar-nav
       .ml-auto.d-flex
         -#= link_to 'javascript:void(0)',
                     class: 'btn btn-outline-primary d-none d-md-inline ml-2',

@@ -1,0 +1,41 @@
+.navbar.no-print.bg-light.px-0
+  .container.navbar-expand.px-2
+    - if @version.chords?
+      .navbar-nav
+        .nav-item
+          %a.nav-link.js-toggle-chords{ href: 'javascript:void(0)' }
+            %i.fas.fa-check-square.mr-1
+            Chords
+
+    .ml-auto.navbar-nav
+      .nav-item
+        = link_to 'javascript:window.print()',
+                    class: 'nav-link',
+                    title: 'Print',
+                    data: { toggle: 'tooltip' } do
+          %i.fas.fa-print
+
+      .nav-item.dropdown
+        = link_to 'javascript:void(0)',
+                  class: 'nav-link ml-2',
+                  title: 'Download',
+                  data: { toggle: 'dropdown', tooltip: true } do
+          %i.fas.fa-cloud-download-alt
+
+        .dropdown-menu.dropdown-menu-right
+
+          = link_to song_version_path(@song, @version, format: 'chopro'), class: 'dropdown-item' do
+            %i.fab.fa-chordpro.mr-1.fa-fw
+            Download as Chordpro
+
+          = link_to song_version_path(@song, @version, format: 'onsong'), class: 'dropdown-item' do
+            %i.fab.fa-onsong.mr-1.fa-fw
+            Download as OnSong
+
+      - if can? :update, @version
+        .nav-item
+          = link_to edit_song_version_path(@song, @version),
+                    class: 'nav-link ml-2',
+                    title: 'Edit',
+                    data: { toggle: 'tooltip' } do
+            %i.fas.fa-pen

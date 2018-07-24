@@ -10,6 +10,10 @@ class VersionDecorator < ApplicationDecorator
     html = ''.html_safe
     sections = content.to_s.split(/\r?\n(?:\r?\n)+/)
 
+    if notes.present?
+      html += h.content_tag(:div, notes, class: 'song-notes')
+    end
+
     sections.select(&:present?).each do |section|
       has_chords = CHORDPRO_REGEX.match?(section) || CHORDSIMPLE_REGEX.match?(section)
       html += h.content_tag(:div, class: "song-section #{'song-section--chorded' if has_chords}") do
