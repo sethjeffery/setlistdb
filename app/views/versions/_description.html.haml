@@ -2,9 +2,17 @@
   %dt Title
   %dd= @version.title
 
-  - if @version.author
-    %dt Author
-    %dd= @version.author
+  - if @version.artists.present?
+    %dt Artist
+    %dd= @version.artist_names
+
+  - if @version.composers.present?
+    %dt Composer
+    %dd= @version.composer_names
+
+  - if @version.lyricists.present?
+    %dt Lyricist
+    %dd= @version.lyricist_names
 
   - if @version.key.present?
     %dt Key

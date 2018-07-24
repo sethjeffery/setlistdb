@@ -4,7 +4,9 @@ class ChordproExporter < Exporter
   def to_s
     file = []
     file << "{title: #{version.title}}"
-    file << "{composer: #{version.author_name}}" if version.author_name?
+    file << "{artist: #{version.artist_names}}" if version.artists.present?
+    file << "{composer: #{version.composer_names}}" if version.composers.present?
+    file << "{lyricist: #{version.lyricist_names}}" if version.lyricists.present?
     file << "{key: #{version.key}}" if version.key?
     file << "{year: #{version.year}}" if version.year?
     file << ""

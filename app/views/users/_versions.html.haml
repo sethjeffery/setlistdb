@@ -24,8 +24,8 @@
 
               .card-list-item__title= version.title
 
-              - if version.author
-                .card-list-item__subtitle= version.author
+              - if version.artists.present?
+                .card-list-item__subtitle= version.artist_names
 
   - elsif @user == current_user
     .card-body

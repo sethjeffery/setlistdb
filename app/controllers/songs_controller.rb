@@ -40,7 +40,9 @@ class SongsController < ApplicationController
   def version_params
     params.require(:version).permit(
       :title,
-      :author_name,
+      :artist_names,
+      :lyricist_names,
+      :composer_names,
       :content,
       :lyrics,
       :key,

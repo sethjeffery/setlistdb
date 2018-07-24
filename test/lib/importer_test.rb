@@ -19,7 +19,7 @@ class ImporterTest < ActiveSupport::TestCase
 
     assert version.new_record?
     assert_equal "You're Beautiful", version.title
-    assert_equal "Phil Wickham", version.author_name
+    assert_equal "Phil Wickham", version.artist_names
     assert_equal "A", version.key
     assert_includes version.content, "[A]I see Your face, in [D]every sunrise"
     refute_includes version.content, "You're Beautiful"
@@ -30,6 +30,7 @@ class ImporterTest < ActiveSupport::TestCase
     content = <<-SONG
       {title: You're Beautiful}
       {composer: Phil Wickham}
+      {lyricist: Seth Jeffery}
       {key: A}
 
       {soc}
@@ -44,7 +45,9 @@ class ImporterTest < ActiveSupport::TestCase
 
     assert version.new_record?
     assert_equal "You're Beautiful", version.title
-    assert_equal "Phil Wickham", version.author_name
+    assert_equal "Phil Wickham", version.composer_names
+    assert_equal "Seth Jeffery", version.lyricist_names
+    assert_equal "", version.artist_names
     assert_equal "A", version.key
     assert_includes version.content, "[A]I see Your face, in [D]every sunrise"
     refute_includes version.content, "You're Beautiful"

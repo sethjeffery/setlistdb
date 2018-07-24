@@ -2,7 +2,6 @@ class Song < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: :slugged
 
-  belongs_to :author, optional: true
   has_one :first_version, -> { ordered }, class_name: 'Version'
   has_many :versions, -> { ordered }, dependent: :destroy
 

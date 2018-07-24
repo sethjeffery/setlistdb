@@ -1,7 +1,6 @@
 write_a_song:
   song: write_a_song
   title: Write A Song
-  author_name: Seth Jeffery
   user: user
   key: G
   position: 1
@@ -13,7 +12,6 @@ write_a_song:
 write_a_song_v2:
   song: write_a_song
   title: Write A Song V2
-  author_name: Seth Jeffery
   user: user
   key: A
   position: 1

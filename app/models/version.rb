@@ -1,4 +1,5 @@
 class Version < ApplicationRecord
+  include Authoring
   include PgSearch
   include Regexes
 
@@ -10,7 +11,6 @@ class Version < ApplicationRecord
 
   belongs_to :song
   belongs_to :user
-  belongs_to :author, optional: true
 
   after_destroy :clean_up_song
   enum version_type: %i[original translation interpretation alternative]
@@ -18,7 +18,7 @@ class Version < ApplicationRecord
   validates_presence_of :title, :content
   validates_format_of :key, with: /\A[A-G][b#]?m?\z/, allow_blank: true
 
-  before_validation :check_create_author
+  before_validation :check_create_authors
   before_validation :check_create_song, on: :create
   before_validation :set_lyrics
 
@@ -30,16 +30,8 @@ class Version < ApplicationRecord
                   against: %i(title author_name lyrics),
                   ignoring: :accents
 
-  def check_create_author
-    if !author && author_name.is_a?(String) && author_name.strip.present?
-      self.author = Author.find_or_create_by(name: author_name.strip)
-    end
-  end
-
   def check_create_song
-    if song_id.blank?
-      self.song = Song.create title: title, author: author
-    end
+    self.song = Song.create title: title if song_id.blank?
   end
 
   def to_param
@@ -57,4 +49,5 @@ class Version < ApplicationRecord
       line.gsub(CHORDPRO_REGEX, '')
     }.join(", ")
   end
+
 end

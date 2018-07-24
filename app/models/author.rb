@@ -1,6 +1,6 @@
 class Author < ApplicationRecord
-  has_many :versions, dependent: :nullify
-  has_many :songs, dependent: :nullify
+  has_many :version_authors, dependent: :destroy
+  has_many :versions, through: :version_authors
 
   def to_s
     name

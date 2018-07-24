@@ -9,8 +9,9 @@
               %h1.song-title
                 = version.title
 
-              %h2.song-subtitle
-                = version.author
+              - if version.artists.present?
+                %h2.song-subtitle
+                  = version.artists.map(&:name).join(', ')
 
               .song-content
                 = version.to_html

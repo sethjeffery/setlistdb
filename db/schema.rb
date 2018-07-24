@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_10_053508) do
+ActiveRecord::Schema.define(version: 2018_07_24_201900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,11 +58,9 @@ ActiveRecord::Schema.define(version: 2018_07_10_053508) do
 
   create_table "songs", force: :cascade do |t|
     t.string "title"
-    t.bigint "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
-    t.index ["author_id"], name: "index_songs_on_author_id"
     t.index ["slug"], name: "index_songs_on_slug"
   end
 
@@ -89,12 +87,22 @@ ActiveRecord::Schema.define(version: 2018_07_10_053508) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "version_authors", force: :cascade do |t|
+    t.bigint "version_id"
+    t.bigint "author_id"
+    t.integer "position", default: 1
+    t.integer "authoring", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_version_authors_on_author_id"
+    t.index ["version_id"], name: "index_version_authors_on_version_id"
+  end
+
   create_table "versions", force: :cascade do |t|
     t.bigint "song_id"
     t.string "title"
     t.text "content"
     t.text "lyrics"
-    t.bigint "author_id"
     t.bigint "user_id"
     t.string "key"
     t.integer "year"
@@ -104,7 +112,6 @@ ActiveRecord::Schema.define(version: 2018_07_10_053508) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "author_name"
-    t.index ["author_id"], name: "index_versions_on_author_id"
     t.index ["lang"], name: "index_versions_on_lang"
     t.index ["song_id", "position"], name: "index_versions_on_song_id_and_position"
     t.index ["title"], name: "index_versions_on_title"
@@ -114,8 +121,8 @@ ActiveRecord::Schema.define(version: 2018_07_10_053508) do
   add_foreign_key "setlist_versions", "setlists"
   add_foreign_key "setlist_versions", "versions"
   add_foreign_key "setlists", "users"
-  add_foreign_key "songs", "authors"
-  add_foreign_key "versions", "authors"
+  add_foreign_key "version_authors", "authors"
+  add_foreign_key "version_authors", "versions"
   add_foreign_key "versions", "songs"
   add_foreign_key "versions", "users"
 end

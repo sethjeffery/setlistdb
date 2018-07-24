@@ -50,8 +50,12 @@ class Importer
       version.year = match[2].to_i
     when 'title'
       version.title = match[2]
-    when 'artist', 'composer', 'lyricist'
-      version.author_name = match[2]
+    when 'artist'
+      version.artist_names = match[2]
+    when 'composer'
+      version.composer_names = match[2]
+    when 'lyricist'
+      version.lyricist_names = match[2]
     when 'key'
       version.key = match[2]
     end
@@ -61,7 +65,7 @@ class Importer
     if index == 0
       version.title = line.strip
     elsif index == 1
-      version.author_name = line.strip
+      version.artist_names = line.strip
     end
   end
 end

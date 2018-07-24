@@ -18,7 +18,7 @@ class VersionsController < ApplicationController
   def new
     first_version = @version.song.first_version
     @version.title = first_version.title
-    @version.author_name = first_version.author_name
+    @version.artist_names = first_version.artist_names
     @version.key = first_version.key
   end
 
@@ -45,7 +45,9 @@ class VersionsController < ApplicationController
   def version_params
     params.require(:version).permit(
       :title,
-      :author_name,
+      :artist_names,
+      :lyricist_names,
+      :composer_names,
       :content,
       :lyrics,
       :key,
