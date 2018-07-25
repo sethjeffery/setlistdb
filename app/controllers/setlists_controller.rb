@@ -50,7 +50,13 @@ class SetlistsController < ApplicationController
   private
 
   def setlist_params
-    params.require(:setlist).permit(:title, :date, :song, :version)
+    params.require(:setlist).permit(
+        :title,
+        :date,
+        :song,
+        :version,
+        :notes
+    )
   end
 
   def decorate!

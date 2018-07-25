@@ -58,7 +58,7 @@ function setContentHtml(el, { content, key, notes }) {
   let html = '';
 
   if(notes) {
-    html += tag({ className: 'song-notes', content: notes });
+    html += tag({ className: 'comment', content: notes });
   }
 
   const sections = content.split(/\r?\n(?:\r?\n)+/);

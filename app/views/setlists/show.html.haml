@@ -3,6 +3,9 @@
 
   .container.margin-content
     .no-print.mb-3#setlist-songs
+      - if @setlist.notes.present?
+        .comment= sanitize(@setlist.notes)
+
       .card.card-xs-borderless
         .card-body.py-sm-2
           = render '/setlists/versions'

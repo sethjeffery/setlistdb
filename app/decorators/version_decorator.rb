@@ -11,7 +11,7 @@ class VersionDecorator < ApplicationDecorator
     sections = content.to_s.split(/\r?\n(?:\r?\n)+/)
 
     if notes.present?
-      html += h.content_tag(:div, notes, class: 'song-notes')
+      html += h.content_tag(:div, notes, class: 'comment')
     end
 
     sections.select(&:present?).each do |section|

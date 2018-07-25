@@ -19,6 +19,12 @@
                    maxlength: 100,
                    placeholder: "Optional"
 
+  .form-group
+    = f.label :notes
+    = f.text_area :notes,
+                  class: 'form-control',
+                  rows: 4
+
   .form-actions
     - if @setlist.persisted?
       = link_to 'Cancel', @setlist, class: 'btn btn-secondary'
