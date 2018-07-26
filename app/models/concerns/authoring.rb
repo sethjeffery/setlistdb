@@ -5,10 +5,10 @@ module Authoring
 
     attr_writer :lyricist_names, :artist_names, :composer_names
 
-    has_many :version_authors, dependent: :destroy
-    has_many :version_artists, -> { artist.ordered }, class_name: 'VersionAuthor'
-    has_many :version_lyricsts, -> { lyricist.ordered }, class_name: 'VersionAuthor'
-    has_many :version_composers, -> { composer.ordered }, class_name: 'VersionAuthor'
+    has_many :version_authors, dependent: :destroy, class_name: "#{name}Author"
+    has_many :version_artists, -> { artist.ordered }, class_name: "#{name}Author"
+    has_many :version_lyricsts, -> { lyricist.ordered }, class_name: "#{name}Author"
+    has_many :version_composers, -> { composer.ordered }, class_name: "#{name}Author"
     has_many :authors, through: :version_authors
     has_many :artists, through: :version_artists, source: :author
     has_many :lyricists, through: :version_lyricsts, source: :author
@@ -19,10 +19,9 @@ module Authoring
   end
 
   def check_create_authors
-    artist_names = self.artist_names.to_s.gsub(/\s+/, ' ').strip.presence
-    lyricist_names = self.lyricist_names.to_s.gsub(/\s+/, ' ').strip.presence
-    composer_names = self.composer_names.to_s.gsub(/\s+/, ' ').strip.presence
-    self.author_name = [artist_names, composer_names, lyricist_names].compact.join(', ')
+    artist_names = self.artist_names.to_s.gsub(/\s+/, ' ').strip
+    lyricist_names = self.lyricist_names.to_s.gsub(/\s+/, ' ').strip
+    composer_names = self.composer_names.to_s.gsub(/\s+/, ' ').strip
 
     version_authors.destroy_all
 

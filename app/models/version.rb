@@ -3,17 +3,13 @@ class Version < ApplicationRecord
   include PgSearch
   include Regexes
 
-  acts_as_list scope: :song
-  scope :ordered, -> { order(:position) }
-  scope :newest_first, -> { order(created_at: :desc) }
-  scope :oldest_first, -> { order(:created_at) }
-  scope :alphabetical, -> { order(:title) }
+  enum version_type: %i[original translation interpretation alternative]
 
+  acts_as_list scope: :song
   belongs_to :song
   belongs_to :user
-
-  after_destroy :clean_up_song
-  enum version_type: %i[original translation interpretation alternative]
+  has_many :version_authors, dependent: :destroy
+  has_many :setlist_versions, dependent: :nullify
 
   validates_presence_of :title, :content
   validates_format_of :key, with: /\A[A-G][b#]?m?\z/, allow_blank: true
@@ -21,6 +17,13 @@ class Version < ApplicationRecord
   before_validation :check_create_authors
   before_validation :check_create_song, on: :create
   before_validation :set_lyrics
+  before_validation :set_authors
+  after_destroy :clean_up_song
+
+  scope :ordered, -> { order(:position) }
+  scope :newest_first, -> { order(created_at: :desc) }
+  scope :oldest_first, -> { order(:created_at) }
+  scope :alphabetical, -> { order(:title) }
 
   scope :find_by_slug_and_position, ->(slug, position) {
     joins(:song).where(songs: { slug: slug }).find_by(position: position)
@@ -50,4 +53,9 @@ class Version < ApplicationRecord
     }.join(", ")
   end
 
+  def set_authors
+    self.author_name = [artist_names, composer_names, lyricist_names].map{|name|
+      name.to_s.gsub(/\s+/, ' ').strip.presence
+    }.compact.join(', ')
+  end
 end
