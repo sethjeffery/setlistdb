@@ -11,20 +11,21 @@
       %span= title @setlist.to_s
       - if can? :update, @setlist
         = link_to edit_setlist_path(@setlist),
-                  class: 'd-none d-md-inline ml-2',
-                  data: { toggle: 'tooltip' } do
+                  class: 'd-none d-md-inline ml-2' do
           %i.fas.fa-pen
 
     .setlist-actions.navbar-nav
-      .ml-auto.d-flex
-        -#= link_to 'javascript:void(0)',
-                    class: 'btn btn-outline-primary d-none d-md-inline ml-2',
+      .nav-item.ml-auto
+        = link_to 'javascript:void(0)',
+                    class: 'nav-link',
                     title: 'Full screen',
-                    data: { toggle: 'tooltip' } do
+                    data: { toggle: 'tooltip', delay: 1 } do
           %i.fas.fa-tv
-        -# if can? :update, @setlist
-          = link_to 'javascript:void(0)',
-                      class: 'btn btn-outline-primary ml-2',
+      - if can? :update, @setlist
+        .nav-item
+          = link_to edit_setlist_setlist_version_path(@setlist, @setlist.setlist_versions.first),
+                      class: 'nav-link',
                       title: 'Edit song',
-                      data: { toggle: 'tooltip' } do
+                      id: 'edit_song_link',
+                      data: { toggle: 'tooltip', delay: 1 } do
             %i.fas.fa-pencil-alt

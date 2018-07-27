@@ -103,11 +103,11 @@ function updatePreview({ content, title, author, key, notes }) {
 }
 
 function observeContentChanges() {
-  const content = document.getElementById('version_content');
-  const notes = document.getElementById('version_notes');
-  const title = document.getElementById('version_title');
-  const author = document.getElementById('version_artist_names');
-  const key = document.getElementById('version_key');
+  const content = document.querySelector('[name*="[content]"]');
+  const notes = document.querySelector('[name*="[notes]"]');
+  const title = document.querySelector('[name*="[title]"]');
+  const author = document.querySelector('[name*="[artist_names]"]');
+  const key = document.querySelector('[name*="[key]"]');
 
   const observeChange = function() {
     updatePreview({ content, title, author, key, notes });

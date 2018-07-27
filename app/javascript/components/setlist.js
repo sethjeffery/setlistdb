@@ -4,6 +4,8 @@ import findClosest from '../principles/findClosest';
 import Glide from '@glidejs/glide';
 import sortable from 'html5sortable/dist/html5sortable.cjs';
 import {post} from "../principles/ajax";
+import rangeSlider from 'rangeslider-pure';
+
 let glide;
 
 addSelectorEventListener('.js-toggle-songs', 'click', function(e) {
@@ -29,11 +31,16 @@ function createGlide({ startAt = 0 } = {}) {
 
   return glide
     .mount()
-    .on('run', function({ direction }) {
-      const activeItem = document.querySelector('.setlist-version .active');
-      activeItem.classList.remove('active');
-      const parent = activeItem.parentNode.parentNode;
-      parent.getElementsByTagName('a')[glide.index].classList.add('active');
+    .on('run', function() {
+      const activeListItem = document.querySelector('.setlist-version .active');
+      activeListItem.classList.remove('active');
+
+      const listItems = document.getElementById('setlist-versions');
+      const newListItem = listItems.getElementsByTagName('a')[glide.index];
+      newListItem.classList.add('active');
+
+      const editSongLink = document.getElementById('edit_song_link');
+      editSongLink.href = editSongLink.href.replace(/[^\/]+\/edit$/, newListItem.dataset.id + '/edit');
     });
 }
 

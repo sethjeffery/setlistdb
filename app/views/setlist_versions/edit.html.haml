@@ -1,8 +1,8 @@
 .container.margin-content
-  - title 'New song version'
+  - title "Edit song"
 
   .row
     .col-lg-7.no-print.mb-4
       = render 'form'
     .col.mb-4
-      = render 'preview', version: @version
+      = render 'versions/preview', version: @setlist_version

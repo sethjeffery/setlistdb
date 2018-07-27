@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_26_131025) do
+ActiveRecord::Schema.define(version: 2018_07_27_185304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 2018_07_26_131025) do
     t.integer "transpose", default: 0
     t.integer "year"
     t.string "lang"
+    t.text "notes"
     t.index ["setlist_id"], name: "index_setlist_versions_on_setlist_id"
     t.index ["version_id"], name: "index_setlist_versions_on_version_id"
   end

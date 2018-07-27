@@ -18,6 +18,7 @@ class SetlistVersion < ApplicationRecord
     self.key ||= version.key
     self.year ||= version.year
     self.lang ||= version.lang
+    self.notes ||= version.notes
 
     self.artist_names = version.artist_names if artist_names.blank?
     self.composer_names = version.composer_names if composer_names.blank?

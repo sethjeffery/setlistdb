@@ -39,6 +39,9 @@ class Ability
       can :manage, Version, user_id: user.id
       can :manage, user
       can :manage, Setlist, user_id: user.id
+      can :manage, SetlistVersion do |setlist_version|
+        setlist_version.setlist.user_id == user.id
+      end
 
       if user.admin?
         can :manage, :all

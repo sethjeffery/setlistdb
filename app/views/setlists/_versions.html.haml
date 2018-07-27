@@ -6,16 +6,17 @@
       Key
 
 %ul.card-list#setlist-versions
-  - @setlist.setlist_versions.ordered.includes(:version).each_with_index do |setlist_version, index|
-    - version = setlist_version.version.decorate
+  - @setlist.setlist_versions.ordered.each_with_index do |setlist_version, index|
 
     %li.card-list-item.setlist-version{ data: { id: setlist_version.to_param }}
       .card-list-item__icon.card-list-item__drag
         %i.fas.fa-bars.fa-fw.d-block
-      = link_to setlist_path(@setlist), class: "card-list-link #{'active' if index == 0}" do
+      = link_to setlist_path(@setlist),
+                class: "card-list-link #{'active' if index == 0}",
+                data: { id: setlist_version.to_param } do
         .row
           .col
-            .card-list-item__title= version.title
-            .card-list-item__subtitle= version.artist_names
+            .card-list-item__title= setlist_version.title
+            .card-list-item__subtitle= setlist_version.artist_names
           .col-key.card-list-item__key
-            = version.key
+            = setlist_version.key

@@ -1,0 +1,2 @@
+class SetlistVersionDecorator < VersionDecorator
+end

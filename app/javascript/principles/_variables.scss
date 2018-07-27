@@ -47,5 +47,7 @@ $alert-color-level:                 -12 !default;
 $navbar-dark-color:                 rgba($white, .75) !default;
 $navbar-dark-hover-color:           rgba($white, 1) !default;
 
+$card-spacer-x:                     1rem !default;
+
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';

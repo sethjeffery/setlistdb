@@ -12,14 +12,14 @@
         = link_to 'javascript:window.print()',
                     class: 'nav-link',
                     title: 'Print',
-                    data: { toggle: 'tooltip' } do
+                    data: { toggle: 'tooltip', delay: 1 } do
           %i.fas.fa-print
 
       .nav-item.dropdown
         = link_to 'javascript:void(0)',
                   class: 'nav-link ml-2',
                   title: 'Download',
-                  data: { toggle: 'dropdown', tooltip: true } do
+                  data: { toggle: 'dropdown', tooltip: true, delay: 1 } do
           %i.fas.fa-cloud-download-alt
 
         .dropdown-menu.dropdown-menu-right
@@ -37,5 +37,5 @@
           = link_to edit_song_version_path(@song, @version),
                     class: 'nav-link ml-2',
                     title: 'Edit',
-                    data: { toggle: 'tooltip' } do
+                    data: { toggle: 'tooltip', delay: 1 } do
             %i.fas.fa-pen

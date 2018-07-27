@@ -1,0 +1,46 @@
+= form_for @setlist_version, url: setlist_setlist_version_path(@setlist, @setlist_version) do |f|
+  = f.hidden_field :title
+  = f.hidden_field :artist_names
+
+  .form-group
+    = f.label :key
+    = f.text_field :key,
+                   class: 'form-control',
+                   maxlength: 3,
+                   pattern: "[A-G][b#]?m?",
+                   title: 'G, Bb, F#m, etc..'
+    .invalid-feedback
+      The song key must be a valid format (e.g. G, Bb, F#m ...)
+
+  .form-group
+    = f.label :content
+    .form-group
+      .toolbar.px-2.py-1
+        .form-row
+          .col-auto.py-1
+            .btn-group#btn-group-chords
+              - chords_of(@setlist_version.key.presence || 'G').each do |chord|
+                - if chord.end_with?('m')
+                  .btn.btn-sm.btn-secondary.js-add-chord
+                    = chord
+                - else
+                  .btn.btn-sm.btn-info.js-add-chord
+                    = chord
+      = f.text_area :content, class: 'form-control has-toolbar', rows: 16
+
+  .form-group
+    = f.label :notes
+    = f.text_area :notes,
+                  class: 'form-control',
+                  rows: 3
+
+  - if @setlist_version.errors.present?
+    .form-group
+      .alert.alert-danger
+        %ul.mb-0.pl-3
+          - @setlist_version.errors.full_messages.each do |msg|
+            %li= msg
+
+  .form-actions
+    = link_to 'Cancel', setlist_path(@setlist), class: 'btn btn-secondary'
+    = f.submit 'Save changes', class: 'btn btn-primary'

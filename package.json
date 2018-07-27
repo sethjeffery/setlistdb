@@ -16,6 +16,7 @@
     "html5sortable": "^0.9.3",
     "popper.js": "^1.14.3",
     "rails-ujs": "^5.2.0",
+    "rangeslider-pure": "^0.4.5-1",
     "turbolinks": "^5.1.1"
   },
   "devDependencies": {

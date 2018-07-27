@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       post 'add/:song_id/:version_id', action: :add, as: :add
       post 'reorder', as: :reorder
     end
+    resources :setlist_versions, path: 'versions'
   end
 
   get 'search', to: 'search#index'

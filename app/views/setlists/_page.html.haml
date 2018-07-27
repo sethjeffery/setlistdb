@@ -1,17 +1,16 @@
 .glide
   .glide__track{ data: { glide_el: "track" } }
     %ul.glide__slides#setlist-slides
-      - @setlist.setlist_versions.ordered.includes(:version).each do |setlist_version|
-        - version = setlist_version.version.decorate
+      - @setlist.setlist_versions.ordered.decorate.each do |setlist_version|
         %li.glide__slide{ data: { id: setlist_version.to_param }}
           .container
             %article.song-page.mx-auto
               %h1.song-title
-                = version.title
+                = setlist_version.title
 
-              - if version.artists.present?
+              - if setlist_version.artist_names.present?
                 %h2.song-subtitle
-                  = version.artists.map(&:name).join(', ')
+                  = setlist_version.artist_names
 
               .song-content
-                = version.to_html
+                = setlist_version.to_html
