@@ -39,7 +39,7 @@ module Authoring
 
     composer_names = composer_names.to_s.split(/(?:, ?| & | and )/).uniq.select(&:present?)
     composer_names.each do |name|
-      author = Author.find_or_create_by(name: name.strip)
+      author = Author.find_or_create_by(namedit_setlist_setlist_version_pathe: name.strip)
       version_authors.create(author_id: author.id, authoring: VersionAuthor.authorings[:composer])
     end
   end

@@ -1,24 +1,41 @@
 .setlist.setlist--show-songs
   = render '/setlists/header'
 
-  .container.margin-content
-    .no-print.mb-3#setlist-songs
-      - if @setlist.notes.present?
-        .comment= sanitize(@setlist.notes)
+  - if @setlist.setlist_versions.present?
+    .container.margin-content
+      .no-print.mb-3#setlist-songs
+        - if @setlist.notes.present?
+          .comment= sanitize(@setlist.notes)
 
-      .card.card-xs-borderless
-        .card-body.py-sm-2
-          = render '/setlists/versions'
+        .card.card-xs-borderless
+          .card-body.py-sm-2
+            = render '/setlists/versions'
 
-      .card.card-xs-borderless
-        .card-body
-          .custom-checkbox.custom-control
-            = check_box_tag :chords, '1', true, class: 'custom-control-input js-toggle-chords'
-            %label.custom-control-label{for: 'chords'} Show chords
+        .card.card-xs-borderless
+          .card-body
+            .custom-checkbox.custom-control
+              = check_box_tag :chords, '1', true, class: 'custom-control-input js-toggle-chords'
+              %label.custom-control-label{for: 'chords'} Show chords
 
           -#%hr
           -#.range
             .text-center.pb-3 Transpose
             = range_field_tag :range, 0, min: -7, max: 7
 
-  = render '/setlists/page'
+    = render '/setlists/page'
+
+  - else
+    .container.margin-content
+      %p.lead.text-center
+        Your setlist doesn't have any songs in it yet!
+        Let's find some!
+
+
+      = form_for :search, method: :get, url: search_path, html: { class: 'form--search' } do |f|
+        .form-group
+          = f.search_field :name,
+                           name: 'q',
+                           class: 'form-control form-control-lg form-control-with-icon',
+                           placeholder: 'Search songs by name',
+                           autofocus: true
+          %i.fas.fa-search.form-control-icon.form-control-lg-icon
