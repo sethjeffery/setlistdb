@@ -55,12 +55,14 @@
 
               = link_to user_facebook_omniauth_authorize_path,
                         class: 'dropdown-item',
-                        onclick: "window.open(this.href,'_parent'); return false;" do
+                        onclick: "window.open(this.href,'_parent'); return false;",
+                        data: { turbolinks: "false" } do
                 %i.fab.fa-facebook-square.mr-1.fa-fw
                 Sign in with Facebook
 
               = link_to user_google_oauth2_omniauth_authorize_path,
                         class: 'dropdown-item',
-                        onclick: "window.open(this.href,'_parent'); return false;" do
+                        onclick: "window.open(this.href,'_parent'); return false;",
+                        data: { turbolinks: "false" } do
                 %i.fab.fa-google-plus-g.mr-1.fa-fw
                 Sign in with Google
