@@ -4,8 +4,10 @@ import findClosest from '../principles/findClosest';
 import Glide from '@glidejs/glide';
 import sortable from 'html5sortable/dist/html5sortable.cjs';
 import {post} from "../principles/ajax";
+import NoSleep from 'nosleep.js';
 
 let glide;
+const noSleep = new NoSleep;
 
 addSelectorEventListener('.js-toggle-songs', 'click', function(e) {
   const setlist = findClosest(this, '.setlist');
@@ -99,4 +101,9 @@ function reorderSetlistPath(id = currentSetlistId()) {
 }
 
 document.addEventListener('turbolinks:load', setupSetlists);
+document.addEventListener('turbolinks:load', noSleep.disable.bind(noSleep));
 setupSetlists();
+
+addSelectorEventListener('#no_sleep', 'change', function() {
+  this.checked ? noSleep.enable() : noSleep.disable();
+});
