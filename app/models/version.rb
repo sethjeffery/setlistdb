@@ -14,7 +14,6 @@ class Version < ApplicationRecord
   validates_presence_of :title, :content
   validates_format_of :key, with: /\A[A-G][b#]?m?\z/, allow_blank: true
 
-  before_validation :check_create_authors
   before_validation :check_create_song, on: :create
   before_validation :set_lyrics
   before_validation :set_authors
