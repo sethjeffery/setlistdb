@@ -8,7 +8,7 @@
 
         - if user_signed_in?
 
-          %li.nav-item.dropdown
+          %li.nav-item.dropdown{ class: ('active' if current_page?(current_user)) }
             = link_to 'javascript:void(0)', class: 'nav-link', data: { toggle: 'dropdown' } do
               = image_tag current_user.image, class: 'avatar'
               %span.d-none.d-sm-inline.ml-2= current_user.name
@@ -35,6 +35,11 @@
               = link_to logout_path, class: 'dropdown-item', method: :delete do
                 %i.fas.fa-sign-out-alt.mr-1.fa-fw
                 Sign out
+
+          - if (setlist = current_user.setlists.active.oldest_first.first).present?
+            %li.nav-item{ class: ('active' if current_page?(setlist)) }
+              = link_to setlist, class: 'nav-link' do
+                %i.fas.fa-list-alt.nav-icon
 
         - else
           %li.nav-item.dropdown
