@@ -37,7 +37,16 @@
                 Sign out
 
         - else
-          %li.nav-item
-            = link_to user_facebook_omniauth_authorize_path, class: 'nav-link' do
-              %i.fab.fa-facebook-square.mr-1
+          %li.nav-item.dropdown
+            = link_to 'javascript:void(0)',
+                      class: 'nav-link',
+                      data: { toggle: 'dropdown' } do
               Sign in
+
+            .dropdown-menu.dropdown-menu-right
+              = link_to user_facebook_omniauth_authorize_path, class: 'dropdown-item' do
+                %i.fab.fa-facebook-square.mr-1.fa-fw
+                Sign in with Facebook
+              = link_to user_google_oauth2_omniauth_authorize_path, class: 'dropdown-item' do
+                %i.fab.fa-google-plus-g.mr-1.fa-fw
+                Sign in with Google

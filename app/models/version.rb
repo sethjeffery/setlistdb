@@ -58,4 +58,8 @@ class Version < ApplicationRecord
       name.to_s.gsub(/\s+/, ' ').strip.presence
     }.compact.join(', ')
   end
+
+  def transpose
+    0
+  end
 end

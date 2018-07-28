@@ -2,7 +2,10 @@
   .text-center
     - if @user == current_user
       %h1= title "Your Profile"
-      .upcase.text-muted You are connected with Facebook
+      - if @user.provider == 'facebook'
+        .upcase.text-muted You are connected with Facebook
+      - elsif @user.provider == 'google_oauth2'
+        .upcase.text-muted You are connected with Google
     - else
       %h1= title @user.name
       .upcase.text-muted Member since #{@user.created_at.strftime('%B %Y')}

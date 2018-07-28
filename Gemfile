@@ -29,6 +29,7 @@ gem 'cancancan'
 gem 'devise'
 gem 'draper-cancancan'
 gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
 
 # SEO
 gem 'meta-tags'
