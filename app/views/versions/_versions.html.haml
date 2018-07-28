@@ -1,7 +1,7 @@
 %ul.card-list
   - @version.song.versions.each do |version|
     %li.card-list-item
-      = link_to song_version_path(@version.song, version), class: "card-list-link #{'active' if version == @version}" do
+      = link_to song_version_path(@version.song, version), class: "card-list-link card-list-link--icon #{'active' if version == @version}" do
         - if version.lang
           %i.card-list-item__icon.fa-fw{class: "flag-#{version.lang}"}
 
@@ -12,7 +12,7 @@
 
   - if can? :create, Version
     %li.card-list-item
-      = link_to new_song_version_path(@version.song), class: "card-list-link" do
+      = link_to new_song_version_path(@version.song), class: "card-list-link card-list-link--icon" do
         %i.card-list-item__icon.fas.fa-plus-circle.fa-fw
         .card-list-item__title
           Add new version

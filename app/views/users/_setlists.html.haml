@@ -11,7 +11,7 @@
       %ul.card-list
         - @user.setlists.newest_first.decorate.each do |setlist|
           %li.card-list-item
-            = link_to setlist, class: "card-list-link" do
+            = link_to setlist, class: "card-list-link card-list-link--icon" do
               %i.card-list-item__icon.far.fa-list-alt.fa-fw
               .card-list-item__title= setlist
 

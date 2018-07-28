@@ -5,6 +5,7 @@ import {renderKey} from "../principles/renderer";
 
 const convertRangeSliders = function() {
   const sliders = document.querySelectorAll('input[type="range"]');
+
   if(sliders.length > 0) {
     const updateSlider = function () {
       const key = document.querySelector('[name*="[key]"]').value;

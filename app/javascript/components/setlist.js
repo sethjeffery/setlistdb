@@ -39,7 +39,9 @@ function createGlide({ startAt = 0 } = {}) {
       newListItem.classList.add('active');
 
       const editSongLink = document.getElementById('edit_song_link');
-      editSongLink.href = editSongLink.href.replace(/[^\/]+\/edit$/, newListItem.dataset.id + '/edit');
+      if(editSongLink) {
+        editSongLink.href = editSongLink.href.replace(/[^\/]+\/edit$/, newListItem.dataset.id + '/edit');
+      }
     });
 }
 
@@ -68,7 +70,7 @@ function setupSetlists() {
     glide = createGlide();
   }
 
-  const sortableVersions = sortable('#setlist-versions', {
+  const sortableVersions = sortable('#setlist-versions.sortable', {
     items: '.card-list-item',
     forcePlaceholderSize: true
   })[0];

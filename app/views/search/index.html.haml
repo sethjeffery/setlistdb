@@ -16,7 +16,7 @@
 
 .container.margin-content
   %ul.card-list.px-2.my-0
-    %li.card-list-header
+    %li.card-list-header.card-list-link--icon
       .row
         .col-9.col-sm-10.col-md-5 Title
         .col-md-5.d-none.d-md-block Author
@@ -24,7 +24,7 @@
 
     - @versions.each do |version|
       %li.card-list-item
-        = link_to song_version_path(version.song, version), class: "card-list-link #{'active' if version == @version}" do
+        = link_to song_version_path(version.song, version), class: "card-list-link card-list-link--icon #{'active' if version == @version}" do
           - if version.lang
             %i.card-list-item__icon.fa-fw{class: "flag-#{version.lang}"}
 

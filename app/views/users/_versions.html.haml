@@ -18,7 +18,7 @@
       %ul.card-list
         - @user.versions.alphabetical.oldest_first.each do |version|
           %li.card-list-item
-            = link_to song_version_path(version.song, version), class: "card-list-link" do
+            = link_to song_version_path(version.song, version), class: "card-list-link card-list-link--icon" do
               - if version.lang
                 %i.card-list-item__icon.fa-fw{class: "flag-#{version.lang}"}
 
