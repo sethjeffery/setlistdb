@@ -19,4 +19,5 @@
             .card-list-item__title= setlist_version.title
             .card-list-item__subtitle= setlist_version.artist_names
           .col-key.card-list-item__key
-            = setlist_version.key
+            = render_key Transposer.transpose_key key: setlist_version.key, by: setlist_version.transpose
+

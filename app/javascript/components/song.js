@@ -1,5 +1,7 @@
 import './song.scss';
 import addSelectorEventListener from '../principles/addSelectorEventListener';
+import {transpose as transposeChord, transposeKey} from "../principles/transposer";
+import {renderKey} from "../principles/renderer";
 
 const CHORD_REGEX = /[A-G](?:[b#])?(?:m|M|maj|MAJ|mM)?(?:sus)?(?:[0-9]{0,2})(?:[b#+-][0-9])?(?:\/[A-G](?:[b#])?)?/g;
 const CHORDPRO_REGEX = new RegExp(`\\[(${CHORD_REGEX.source})]`, 'g');
@@ -54,7 +56,7 @@ function convertToChordPro(lines) {
   return output;
 }
 
-function setContentHtml(el, { content, key, notes }) {
+function setContentHtml(el, { content, transpose, key, notes }) {
   let html = '';
 
   if(notes) {
@@ -81,7 +83,15 @@ function setContentHtml(el, { content, key, notes }) {
     }
 
     convertToChordPro(lines).filter(s => s).forEach(line => {
-      const sanitized = escapeHtml(line).replace(CHORDPRO_REGEX, '<span class="chord">$1</span>');
+      const sanitized = escapeHtml(line).replace(CHORDPRO_REGEX, function(_m, chord) {
+        if(transpose) {
+          const note = chord.match(/[A-G][b#]?/)[0];
+          const newKey = transposeKey({ key, by: transpose });
+          const newNote = transposeChord({ from: key, to: newKey, note: chord });
+          chord = chord.replace(note, newNote);
+        }
+        return `<span class="chord">${renderKey(chord)}</span>`;
+      });
       sectionHtml += tag({ content: sanitized, className: 'song-line' });
     });
 
@@ -92,12 +102,18 @@ function setContentHtml(el, { content, key, notes }) {
   addSpacing(el);
 }
 
-function updatePreview({ content, title, author, key, notes }) {
+function updatePreview({ content, title, author, key, notes, transpose }) {
   const contentEl = document.querySelector('.song-page--preview .song-content');
   const titleEl = document.querySelector('.song-page--preview .song-title');
   const subtitleEl = document.querySelector('.song-page--preview .song-subtitle');
 
-  setContentHtml(contentEl, { content: content.value, key: key.value, notes: notes.value });
+  setContentHtml(contentEl, {
+    content: content && content.value,
+    transpose: transpose && parseInt(transpose.value),
+    key: key && key.value,
+    notes: notes && notes.value
+  });
+
   titleEl.innerHTML = title.value;
   subtitleEl.innerHTML = author.value;
 }
@@ -108,18 +124,20 @@ function observeContentChanges() {
   const title = document.querySelector('[name*="[title]"]');
   const author = document.querySelector('[name*="[artist_names]"]');
   const key = document.querySelector('[name*="[key]"]');
+  const transpose = document.querySelector('[name*="[transpose]"]');
 
   const observeChange = function() {
-    updatePreview({ content, title, author, key, notes });
+    updatePreview({ content, title, author, key, notes, transpose });
   };
 
   if(content) {
-    content.addEventListener('input', observeChange, { passive: true });
-    content.addEventListener('change', observeChange, { passive: true });
-    title.addEventListener('input', observeChange, { passive: true });
-    author.addEventListener('input', observeChange, { passive: true });
-    key.addEventListener('input', observeChange, { passive: true });
-    notes.addEventListener('input', observeChange, { passive: true });
+    content && content.addEventListener('input', observeChange, { passive: true });
+    content && content.addEventListener('change', observeChange, { passive: true });
+    title && title.addEventListener('input', observeChange, { passive: true });
+    author && author.addEventListener('input', observeChange, { passive: true });
+    key && key.addEventListener('input', observeChange, { passive: true });
+    notes && notes.addEventListener('input', observeChange, { passive: true });
+    transpose && transpose.addEventListener('change', observeChange, { passive: true });
   }
 
   document.querySelectorAll('.song-content').forEach(addSpacing);

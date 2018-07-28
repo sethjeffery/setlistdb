@@ -2,6 +2,7 @@ import './form.scss';
 import './choices/cross.svg';
 import './choices/cross-inverse.svg';
 import Choices from 'choices.js';
+import './form.sliders';
 
 function toFirstLetterUppercase(str) {
   return str && `${str[0].toUpperCase()}${str.slice(1, str.length)}`;

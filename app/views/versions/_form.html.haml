@@ -85,10 +85,10 @@
               - chords_of(@version.key.presence || 'G').each do |chord|
                 - if chord.end_with?('m')
                   .btn.btn-sm.btn-secondary.js-add-chord
-                    = chord
+                    = render_key chord
                 - else
                   .btn.btn-sm.btn-info.js-add-chord
-                    = chord
+                    = render_key chord
       = f.text_area :content, class: 'form-control has-toolbar', rows: 16
 
   .form-group

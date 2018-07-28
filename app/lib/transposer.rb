@@ -81,6 +81,14 @@ module Transposer
     chromatic_at(final_c, diatonic_at(final_d)) || chromatic_at(final_c)
   end
 
+  #   transpose_key(key: 'F', by: 3)
+  #     => 'G#'
+  #
+  def transpose_key(key:, by:)
+    transposed = chromatic_at((chromatic_index(key) + by) % 12)
+    key.end_with?('m') ? transposed + 'm' : transposed
+  end
+
   # 0 => C, 1 => C#, ..
   def chromatic_at(index, key=nil)
     CHROMATICS.detect{|k, v| v == index && (!key || k.start_with?(key))}.try(:[], 0)

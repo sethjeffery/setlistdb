@@ -2,15 +2,16 @@ import './toolbar.scss';
 import {chordsOf} from 'principles/transposer';
 import trigger from 'principles/trigger';
 import addSelectorEventListener from '../principles/addSelectorEventListener';
+import {renderKey} from "../principles/renderer";
 
 function updateChords() {
   const btnGroupChords = document.getElementById('btn-group-chords');
   const chords = chordsOf(this.value ? this.value : 'G');
   btnGroupChords.innerHTML = chords.map(chord => {
     if(/m$/.test(chord)) {
-      return `<div class="btn btn-sm btn-secondary js-add-chord">${chord}</div>`;
+      return `<div class="btn btn-sm btn-secondary js-add-chord">${renderKey(chord)}</div>`;
     } else {
-      return `<div class="btn btn-sm btn-info js-add-chord">${chord}</div>`;
+      return `<div class="btn btn-sm btn-info js-add-chord">${renderKey(chord)}</div>`;
     }
   }).join('');
 }

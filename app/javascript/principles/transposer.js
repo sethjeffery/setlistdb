@@ -67,7 +67,7 @@ const FLATS  = [0, 1, 2, 3, 4, 5, 6].map(i => (3 + i*4) % 7);
 //   transpose({ from: 'F', to: 'Gb', note: 'D' })
 //     => 'Eb' # same note as above but in key signature of Gb
 //
-export function transpose({ from, to, note }) {
+export function transpose({ from, to, by, note = from }) {
   const noteC = chromaticIndex(note);
   const fromC = chromaticIndex(from);
   const toC = chromaticIndex(to);
@@ -81,6 +81,17 @@ export function transpose({ from, to, note }) {
   const finalC = (noteC + diffC + 12) % 12;
   const finalD = (noteD + diffD + 7) % 7;
   return chromaticAt(finalC, diatonicAt(finalD)) || chromaticAt(finalC);
+}
+
+//   transposeKey({ key: 'F', by: 2 })
+//     => 'G'
+//
+//   transposeKey({ key: 'C#', by: -2 })
+//     => 'B'
+//
+export function transposeKey({ key, by }) {
+  const transposed = chromaticAt((chromaticIndex(key) + by + 12) % 12);
+  return key.match(/m$/) ? transposed + 'm' : transposed;
 }
 
 // 0 => C, 1 => C#, ..

@@ -34,7 +34,17 @@ class VersionDecorator < ApplicationDecorator
         end
 
         as_chord_pro(lines).each do |line|
-          sanitized = h.sanitize(line).gsub(CHORDPRO_REGEX, '<span class="chord">\1</span>').html_safe
+          sanitized = h.sanitize(line).gsub(CHORDPRO_REGEX) { |m|
+            m = m.match(CHORD_REGEX).to_s
+            if transpose
+              note = m.match(/[A-G][b#]?/).to_s
+              new_key = Transposer.transpose_key(key: key, by: transpose)
+              new_note = Transposer.transpose(from: key, to: new_key, note: note)
+              m.gsub!(note, new_note)
+            end
+            m.gsub!(/([b#])/, '<sup>\1</sup>')
+            %{<span class="chord">#{m}</span>}
+          }.html_safe
           line = h.content_tag(:div, sanitized, class: 'song-line')
           section_html += line
         end

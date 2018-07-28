@@ -4,7 +4,6 @@ import findClosest from '../principles/findClosest';
 import Glide from '@glidejs/glide';
 import sortable from 'html5sortable/dist/html5sortable.cjs';
 import {post} from "../principles/ajax";
-import rangeSlider from 'rangeslider-pure';
 
 let glide;
 
