@@ -49,9 +49,18 @@
               Sign in
 
             .dropdown-menu.dropdown-menu-right
-              = link_to user_facebook_omniauth_authorize_path, class: 'dropdown-item' do
+
+              - # window.open(...) gets around the oauth redirection on Mobile Apps
+              - # https://stackoverflow.com/questions/9587012/oauth-flow-iphone-rails-facebook
+
+              = link_to user_facebook_omniauth_authorize_path,
+                        class: 'dropdown-item',
+                        onclick: "window.open(this.href,'_parent'); return false;" do
                 %i.fab.fa-facebook-square.mr-1.fa-fw
                 Sign in with Facebook
-              = link_to user_google_oauth2_omniauth_authorize_path, class: 'dropdown-item' do
+
+              = link_to user_google_oauth2_omniauth_authorize_path,
+                        class: 'dropdown-item',
+                        onclick: "window.open(this.href,'_parent'); return false;" do
                 %i.fab.fa-google-plus-g.mr-1.fa-fw
                 Sign in with Google
