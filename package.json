@@ -12,7 +12,7 @@
     "bootstrap": "^4.1.1",
     "bootstrap.native": "^2.0.23",
     "choices.js": "^3.0.4",
-    "events-polyfill": "^2.0.5",
+    "events-polyfill": "^2.0.7",
     "html5sortable": "^0.9.3",
     "popper.js": "^1.14.3",
     "rails-ujs": "^5.2.0",
