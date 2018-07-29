@@ -45,9 +45,25 @@
     margin-bottom: 0;
   }
 
-
-  .glide .container {
-    padding-left: 0 !important;
+  .glide__slides {
+    transform: none !important;
+    width: 100vw !important;
   }
 
+  .glide__slide {
+    display: none;
+  }
+
+  .glide__slide--active {
+    display: block;
+    width: 100vw !important;
+
+    .container {
+      padding-left: 0 !important;
+    }
+  }
+
+  .comment {
+    padding: 0;
+  }
 }
