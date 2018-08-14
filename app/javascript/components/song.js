@@ -23,7 +23,7 @@ function addSpacing(el) {
       line.querySelectorAll('.chord').forEach(chord => {
         if (lastChord) {
           const offset = chord.offsetLeft - lastChord.offsetLeft - lastChord.clientWidth;
-          if (offset < 10 && offset >= 0 && chord.offsetTop === lastChord.offsetTop) {
+          if (offset < 10 && chord.offsetTop === lastChord.offsetTop) {
             const spacer = document.createElement('span');
             spacer.className = 'spacer';
             spacer.style.width = parseInt(lastChord.offsetLeft + lastChord.clientWidth - chord.offsetLeft) / 16 + .25 + 'em';
