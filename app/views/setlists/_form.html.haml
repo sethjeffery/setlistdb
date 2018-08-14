@@ -25,10 +25,14 @@
                   class: 'form-control',
                   rows: 4
 
-  .form-actions
-    - if @setlist.persisted?
-      = link_to 'Cancel', @setlist, class: 'btn btn-secondary'
-    - else
-      = link_to 'Cancel', setlists_path, class: 'btn btn-secondary'
+  .form-actions.clearfix
+    .float-left
+      - if @setlist.persisted?
+        = link_to 'Cancel', @setlist, class: 'btn btn-secondary'
+      - else
+        = link_to 'Cancel', setlists_path, class: 'btn btn-secondary'
 
-    = f.submit 'Save changes', class: 'btn btn-primary'
+      = f.submit 'Save changes', class: 'btn btn-primary'
+    .float-right
+      - if @setlist.persisted?
+        = link_to 'Remove', setlist_path(@setlist), method: :delete, class: 'btn btn-danger ml-auto'

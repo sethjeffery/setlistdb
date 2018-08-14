@@ -17,4 +17,13 @@ class SetlistIntegrationTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test 'destroy setlist' do
+    setlist = setlists(:active)
+    sign_in setlist.user
+
+    delete "/setlists/#{setlist.to_param}"
+    assert_redirected_to "/users/#{setlist.user.to_param}"
+    assert_nil Setlist.find_by(id: setlist.id)
+  end
+
 end

@@ -5,7 +5,7 @@ class Setlist < ApplicationRecord
   attr_accessor :song, :version
 
   belongs_to :user
-  has_many :setlist_versions
+  has_many :setlist_versions, dependent: :destroy
   has_many :versions, through: :setlist_versions
 
   scope :active, -> { where('date >= ?', Date.current) }

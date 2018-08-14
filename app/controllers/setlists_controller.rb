@@ -47,6 +47,11 @@ class SetlistsController < ApplicationController
     head 200
   end
 
+  def destroy
+    @setlist.destroy
+    redirect_to user_path(current_user)
+  end
+
   private
 
   def setlist_params

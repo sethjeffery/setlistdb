@@ -11,6 +11,11 @@ class SetlistVersionsController < ApplicationController
     end
   end
 
+  def destroy
+    @setlist_version.destroy
+    redirect_to setlist_path(@setlist)
+  end
+
   protected
 
   def setlist_version_params

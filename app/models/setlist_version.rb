@@ -4,7 +4,7 @@ class SetlistVersion < ApplicationRecord
 
   belongs_to :setlist
   belongs_to :version, optional: true
-  has_many :setlist_version_authors
+  has_many :setlist_version_authors, dependent: :destroy
   has_many :authors, through: :setlist_version_authors
 
   acts_as_list

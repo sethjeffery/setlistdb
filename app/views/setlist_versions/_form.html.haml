@@ -39,6 +39,9 @@
           - @setlist_version.errors.full_messages.each do |msg|
             %li= msg
 
-  .form-actions
-    = link_to 'Cancel', setlist_path(@setlist), class: 'btn btn-secondary'
-    = f.submit 'Save changes', class: 'btn btn-primary'
+  .form-actions.clearfix
+    .float-left
+      = link_to 'Cancel', setlist_path(@setlist), class: 'btn btn-secondary'
+      = f.submit 'Save changes', class: 'btn btn-primary'
+    .float-right
+      = link_to 'Remove', setlist_setlist_version_path(@setlist, @setlist_version), method: :delete, class: 'btn btn-danger ml-auto'
