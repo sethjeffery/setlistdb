@@ -36,7 +36,7 @@ class VersionDecorator < ApplicationDecorator
         as_chord_pro(lines).each do |line|
           sanitized = h.sanitize(line).gsub(CHORDPRO_REGEX) { |m|
             m = m.match(CHORD_REGEX).to_s
-            if version.transpose != 0 && version.present?
+            if version.transpose? && version.key?
               note = m.match(/[A-G][b#]?/).to_s
               new_key = Transposer.transpose_key(key: key, by: transpose)
               new_note = Transposer.transpose(from: key, to: new_key, note: note)
