@@ -26,7 +26,7 @@
 
         - if can? :update, @setlist
           .nav-item
-            = link_to edit_setlist_setlist_version_path(@setlist, @setlist.setlist_versions.first),
+            = link_to edit_setlist_setlist_version_path(@setlist, @setlist.setlist_versions.ordered.first),
                         class: 'nav-link',
                         title: 'Edit song',
                         id: 'edit_song_link',

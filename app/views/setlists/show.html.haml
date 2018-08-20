@@ -21,11 +21,6 @@
               = check_box_tag :no_sleep, '1', false, class: 'custom-control-input js-toggle-chords'
               %label.custom-control-label{for: 'no_sleep'} Prevent device sleeping
 
-          -#%hr
-          -#.range
-            .text-center.pb-3 Transpose
-            = range_field_tag :range, 0, min: -7, max: 7
-
     = render '/setlists/page'
 
   - else
