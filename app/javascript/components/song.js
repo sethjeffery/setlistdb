@@ -38,9 +38,9 @@ function addSpacing(el) {
 
 function convertToChordPro(lines) {
   const output = [];
-  let index = 0, match = null;
-  lines.forEach(line => {
-    if(line.match(CHORDSIMPLE_REGEX) && index < lines.length && !lines[index+1].match(CHORDSIMPLE_REGEX)) {
+  let match = null;
+  lines.forEach((line, index) => {
+    if(index < lines.length - 1 && line.match(CHORDSIMPLE_REGEX) && !lines[index+1].match(CHORDSIMPLE_REGEX)) {
       let offset = 0;
       while(match = CHORD_REGEX.exec(line)) {
         const before = lines[index+1].slice(0, match.index + offset);
@@ -51,7 +51,6 @@ function convertToChordPro(lines) {
     } else {
       output.push(line);
     }
-    index++;
   });
   return output;
 }
