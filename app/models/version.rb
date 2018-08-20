@@ -11,7 +11,7 @@ class Version < ApplicationRecord
   has_many :version_authors, dependent: :destroy
   has_many :setlist_versions, dependent: :nullify
 
-  validates_presence_of :title, :content
+  validates_presence_of :title, :content, :key
   validates_format_of :key, with: /\A[A-G][b#]?m?\z/, allow_blank: true
 
   before_validation :check_create_song, on: :create
@@ -58,7 +58,7 @@ class Version < ApplicationRecord
     }.compact.join(', ')
   end
 
-  def transpose
-    0
+  def transpose?
+    false
   end
 end

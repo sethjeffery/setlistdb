@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_27_185304) do
+ActiveRecord::Schema.define(version: 2018_08_20_192255) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,7 +123,7 @@ ActiveRecord::Schema.define(version: 2018_07_27_185304) do
     t.text "content"
     t.text "lyrics"
     t.bigint "user_id"
-    t.string "key"
+    t.string "key", default: "G"
     t.integer "year"
     t.string "lang"
     t.integer "version_type"
