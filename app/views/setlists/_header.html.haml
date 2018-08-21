@@ -21,7 +21,7 @@
           = link_to 'javascript:void(0)',
                       class: 'nav-link',
                       title: 'Full screen',
-                      data: { toggle: 'tooltip', delay: 1 } do
+                      data: { toggle: 'tooltip', delay: 1, present: true, target: 'presentation' } do
             %i.fas.fa-tv
 
         - if can? :update, @setlist

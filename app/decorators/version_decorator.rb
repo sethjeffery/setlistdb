@@ -57,6 +57,28 @@ class VersionDecorator < ApplicationDecorator
     html
   end
 
+  def to_presentation
+    html = ''.html_safe
+    sections = content.to_s
+                 .gsub(CHORDSIMPLE_REGEX, '')
+                 .gsub(CHORDPRO_REGEX, '')
+                 .split(/\r?\n(?:\r?\n)+/)
+                 .select(&:present?)
+
+    sections.each do |section|
+      lines = section.split(/\r?\n/)
+      lines.in_groups_of(4, false) do |group|
+        html += h.content_tag(:section, class: 'presentation-slide fade') do
+          h.safe_join(group.map do |line|
+            h.content_tag :p, line.sub(/[,\s]+$/, '')
+          end)
+        end
+      end
+    end
+
+    html
+  end
+
   private
 
   def as_chord_pro(lines)

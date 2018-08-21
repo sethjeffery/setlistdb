@@ -18,10 +18,11 @@
               %label.custom-control-label{for: 'chords'} Show chords
 
             .custom-checkbox.custom-control.mt-1
-              = check_box_tag :no_sleep, '1', false, class: 'custom-control-input js-toggle-chords'
+              = check_box_tag :no_sleep, '1', false, class: 'custom-control-input'
               %label.custom-control-label{for: 'no_sleep'} Prevent device sleeping
 
     = render '/setlists/page'
+    = render '/setlists/presentation'
 
   - else
     .container.margin-content

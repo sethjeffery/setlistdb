@@ -6,7 +6,7 @@
       Key
 
 %ul.card-list#setlist-versions{ class: ('sortable' if can?(:update, @setlist)) }
-  - @setlist.setlist_versions.ordered.each_with_index do |setlist_version, index|
+  - @setlist.setlist_versions.ordered.decorate.each_with_index do |setlist_version, index|
 
     %li.card-list-item.setlist-version{ data: { id: setlist_version.to_param }}
       - if can?(:update, @setlist)
@@ -20,4 +20,3 @@
             .card-list-item__title= setlist_version.title
           .col-key.card-list-item__key
             = render_key Transposer.transpose_key key: setlist_version.key, by: setlist_version.transpose
-
