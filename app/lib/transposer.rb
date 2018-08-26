@@ -85,8 +85,10 @@ module Transposer
   #     => 'G#'
   #
   def transpose_key(key:, by:)
-    transposed = chromatic_at((chromatic_index(key) + by) % 12)
-    key.end_with?('m') ? transposed + 'm' : transposed
+    if key.present? && chromatic_index(key.sub(/m$/, ''))
+      transposed = chromatic_at((chromatic_index(key.sub(/m$/, '')) + by) % 12)
+      key.end_with?('m') ? transposed + 'm' : transposed
+    end
   end
 
   # 0 => C, 1 => C#, ..
