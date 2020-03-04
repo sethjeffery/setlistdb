@@ -5,7 +5,7 @@ ruby '2.4.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.0'
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 3.12'
 gem 'haml-rails'
 gem 'draper'
 gem 'acts_as_list'
